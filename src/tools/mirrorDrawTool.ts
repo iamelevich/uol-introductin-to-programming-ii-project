@@ -1,6 +1,7 @@
 import type P5 from 'p5';
+import { ITool } from './tool';
 
-export class mirrorDrawTool {
+export class mirrorDrawTool implements ITool {
 	name = 'mirrorDraw';
 	icon = 'assets/mirrorDraw.jpg';
 

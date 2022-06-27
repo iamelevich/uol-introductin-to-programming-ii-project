@@ -1,4 +1,5 @@
 import type P5 from 'p5';
+import { ITool } from './tools/tool';
 
 //container object for storing the tools. Functions to add new tools and select a tool
 export function Toolbox(p: P5) {
@@ -19,7 +20,6 @@ export function Toolbox(p: P5) {
 
 		//call loadPixels to make sure most recent changes are saved to pixel array
 		p.loadPixels();
-
 	}
 
 	//add a new tool icon to the html page
@@ -32,7 +32,7 @@ export function Toolbox(p: P5) {
 	};
 
 	//add a tool to the tools array
-	this.addTool = function(tool) {
+	this.addTool = function(tool: ITool) {
 		//check that the object tool has an icon and a name
 		if (!tool.icon || !tool.name) {
 			alert('make sure your tool has both a name and an icon');

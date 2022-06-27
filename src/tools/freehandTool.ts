@@ -1,6 +1,7 @@
 import type P5 from 'p5';
+import { ITool } from './tool';
 
-export class FreehandTool {
+export class FreehandTool implements ITool {
 	icon = 'assets/freehand.jpg';
 	name = 'freehand';
 

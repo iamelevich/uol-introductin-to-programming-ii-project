@@ -1,6 +1,7 @@
 import type P5 from 'p5';
+import { ITool } from './tool';
 
-export class SprayTool {
+export class SprayTool implements ITool {
     name = 'sprayCanTool';
     icon = 'assets/sprayCan.jpg';
     points = 13;

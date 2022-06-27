@@ -1,6 +1,7 @@
 import type P5 from 'p5';
+import { ITool } from './tool';
 
-export class LineToTool {
+export class LineToTool implements ITool {
 	icon = 'assets/lineTo.jpg';
 	name = 'LineTo';
 
