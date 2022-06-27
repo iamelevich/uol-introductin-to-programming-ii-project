@@ -1,9 +1,9 @@
 import type P5 from 'p5';
 import { ITool } from './tool';
 
-export class LineToTool implements ITool {
-	icon = 'assets/lineTo.jpg';
-	name = 'LineTo';
+export class RectangleTool implements ITool {
+	icon = 'assets/rectangle.png';
+	name = 'Rectangle';
 
 	startMouseX = -1;
 	startMouseY = -1;
@@ -20,7 +20,12 @@ export class LineToTool implements ITool {
 				this.p.loadPixels();
 			} else {
 				this.p.updatePixels();
-				this.p.line(this.startMouseX, this.startMouseY, this.p.mouseX, this.p.mouseY);
+				this.p.rect(
+					this.startMouseX,
+					this.startMouseY,
+					this.p.mouseX - this.startMouseX,
+					this.p.mouseY - this.startMouseY
+				);
 			}
 		} else if(this.drawing) {
 			this.drawing = false;

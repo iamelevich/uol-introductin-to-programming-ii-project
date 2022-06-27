@@ -28,6 +28,6 @@ Run `pnpm build` to build prod version in `dist` folder
 - [ ] Add Erase tool
 - [ ] Add Fill with color tool
 - [ ] Add text tool ??
-- [ ] Add Rectangle tool
+- [x] Add Rectangle tool
 - [ ] Add Circle tool
 - [ ] Add Polygon tool

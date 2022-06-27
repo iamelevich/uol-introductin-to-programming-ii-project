@@ -7,7 +7,8 @@ import { ColourPalette } from './colourPalette';
 import { FreehandTool } from './tools/freehandTool';
 import { LineToTool } from './tools/lineToTool';
 import { SprayTool } from './tools/sprayTool';
-import { mirrorDrawTool } from './tools/mirrorDrawTool';
+import { RirrorDrawTool } from './tools/mirrorDrawTool';
+import { RectangleTool } from './tools/rectangleTool';
 
 const sketch = function(p: P5) {
     const toolbox = new Toolbox(p);
@@ -25,7 +26,8 @@ const sketch = function(p: P5) {
         toolbox.addTool(new FreehandTool(p));
         toolbox.addTool(new LineToTool(p));
         toolbox.addTool(new SprayTool(p));
-        toolbox.addTool(new mirrorDrawTool(p));
+        toolbox.addTool(new RirrorDrawTool(p));
+        toolbox.addTool(new RectangleTool(p));
         p.background(255);
     };
 

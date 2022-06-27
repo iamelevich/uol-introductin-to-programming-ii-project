@@ -1,8 +1,8 @@
 import type P5 from 'p5';
 import { ITool } from './tool';
 
-export class mirrorDrawTool implements ITool {
-	name = 'mirrorDraw';
+export class RirrorDrawTool implements ITool {
+	name = 'MirrorDraw';
 	icon = 'assets/mirrorDraw.jpg';
 
 	//which axis is being mirrored (x or y) x is default
