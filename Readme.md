@@ -29,5 +29,5 @@ Run `pnpm build` to build prod version in `dist` folder
 - [ ] Add Fill with color tool
 - [ ] Add text tool ??
 - [x] Add Rectangle tool
-- [ ] Add Circle tool
+- [x] Add Circle tool
 - [ ] Add Polygon tool

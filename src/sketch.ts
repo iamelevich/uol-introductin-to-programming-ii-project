@@ -9,6 +9,7 @@ import { LineToTool } from './tools/lineToTool';
 import { SprayTool } from './tools/sprayTool';
 import { RirrorDrawTool } from './tools/mirrorDrawTool';
 import { RectangleTool } from './tools/rectangleTool';
+import { CircleTool } from './tools/circleTool';
 
 const sketch = function(p: P5) {
     const toolbox = new Toolbox(p);
@@ -28,6 +29,7 @@ const sketch = function(p: P5) {
         toolbox.addTool(new SprayTool(p));
         toolbox.addTool(new RirrorDrawTool(p));
         toolbox.addTool(new RectangleTool(p));
+        toolbox.addTool(new CircleTool(p));
         p.background(255);
     };
 
