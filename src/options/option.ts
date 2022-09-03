@@ -10,9 +10,12 @@ export abstract class ToolOption {
     }
 
     protected addNewOption(optionHTML: string): void {
-        this.optionsElement.html(`
-            <div class="rounded-lg bg-slate-200 p-2">${optionHTML}</div>
-        `);
+        this.optionsElement.html(
+            `
+            <div class="rounded-lg bg-slate-200 p-2 mb-2">${optionHTML}</div>
+        `,
+            true
+        );
     }
 
     abstract addToList(): void;

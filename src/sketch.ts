@@ -12,48 +12,48 @@ import { RectangleTool } from './tools/rectangleTool';
 import { CircleTool } from './tools/circleTool';
 
 const sketch = function (p: P5) {
-  const toolbox = new Toolbox(p);
-  let colorPalette: ColourPalette | undefined;
+    const toolbox = new Toolbox(p);
+    let colorPalette: ColourPalette | undefined;
 
-  p.setup = function () {
-    const canvasContainer = p.select('#content');
-    const c = p.createCanvas(
-      (canvasContainer.size() as any).width,
-      (canvasContainer.size() as any).height
-    );
-    c.parent('content');
+    p.setup = function () {
+        const canvasContainer = p.select('#content');
+        const c = p.createCanvas(
+            (canvasContainer.size() as any).width,
+            (canvasContainer.size() as any).height
+        );
+        c.parent('content');
 
-    //create helper functions and the colour palette
-    new HelperFunctions(p);
-    colorPalette = new ColourPalette(p);
+        //create helper functions and the colour palette
+        new HelperFunctions(p);
+        colorPalette = new ColourPalette(p);
 
-    //add the tools to the toolbox.
-    toolbox.addTool(new PencilTool(p));
-    toolbox.addTool(new LineToTool(p));
-    toolbox.addTool(new SprayTool(p));
-    toolbox.addTool(new RirrorDrawTool(p));
-    toolbox.addTool(new RectangleTool(p));
-    toolbox.addTool(new CircleTool(p));
-    p.background(255);
-  };
+        //add the tools to the toolbox.
+        toolbox.addTool(new PencilTool(p));
+        toolbox.addTool(new LineToTool(p));
+        toolbox.addTool(new SprayTool(p));
+        toolbox.addTool(new RirrorDrawTool(p));
+        toolbox.addTool(new RectangleTool(p));
+        toolbox.addTool(new CircleTool(p));
+        p.background(255);
+    };
 
-  p.draw = function () {
-    // Do not process clicks out the canvas
-	if (p.mouseX < 0 || p.mouseY < 0) {
-		return;
-	}
-    // When color panel is open - do not process click
-    if (colorPalette?.isAllowedToDraw() === false) {
-        return;
-    }
+    p.draw = function () {
+        // Do not process clicks out the canvas
+        if (p.mouseX < 0 || p.mouseY < 0) {
+            return;
+        }
+        // When color panel is open - do not process click
+        if (colorPalette?.isAllowedToDraw() === false) {
+            return;
+        }
 
-    // Process draw() function of the selected tool
-    if (typeof toolbox.selectedTool['draw'] == 'function') {
-      toolbox.selectedTool.draw();
-    } else {
-      alert('it doesn\'t look like your tool has a draw method!');
-    }
-  };
+        // Process draw() function of the selected tool
+        if (typeof toolbox.selectedTool['draw'] == 'function') {
+            toolbox.selectedTool.draw();
+        } else {
+            alert("it doesn't look like your tool has a draw method!");
+        }
+    };
 };
 
 new P5(sketch);
