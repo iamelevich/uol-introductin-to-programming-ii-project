@@ -20,11 +20,11 @@ Run `pnpm build` to build prod version in `dist` folder
 
 - [x] Use TypesScript
 - [x] Refactor template to use classes and etc
-- [ ] Add option to change size for all tools
-- [ ] Improve color choosing like in paint
-- [ ] Add layers functionality ??
-- [ ] Improve top menu to looks good
-- [ ] Improve desing of the app
+- [x] Add option to change size for all tools
+- [x] Improve color choosing like in paint
+- [x] Improve top menu to looks good
+- [x] Improve desing of the app
+- [ ] Add type choosing option where it possible (circle, rectangle, pencil and etc.)
 - [ ] Add Erase tool
 - [ ] Add Fill with color tool
 - [ ] Add text tool ??
