@@ -10,6 +10,7 @@ import { SprayTool } from './tools/sprayTool';
 import { RirrorDrawTool } from './tools/mirrorDrawTool';
 import { RectangleTool } from './tools/rectangleTool';
 import { CircleTool } from './tools/circleTool';
+import { FillTool } from './tools/fillTool';
 
 const sketch = function (p: P5) {
     const toolbox = new Toolbox(p);
@@ -34,13 +35,18 @@ const sketch = function (p: P5) {
         toolbox.addTool(new RirrorDrawTool(p));
         toolbox.addTool(new RectangleTool(p));
         toolbox.addTool(new CircleTool(p));
-        // toolbox.addTool(new FillTool(p, colorPalette));
+        toolbox.addTool(new FillTool(p, colorPalette));
         p.background(255);
     };
 
     p.draw = function () {
         // Do not process clicks out the canvas
-        if (p.mouseX < 0 || p.mouseY < 0) {
+        if (
+            p.mouseX < 0 ||
+            p.mouseY < 0 ||
+            p.mouseX > p.width ||
+            p.mouseY > p.height
+        ) {
             return;
         }
         // When color panel is open - do not process click
@@ -58,7 +64,16 @@ const sketch = function (p: P5) {
 
     p.mouseClicked = (e) => {
         // Do not process clicks out the canvas
-        if (p.mouseX < 0 || p.mouseY < 0) {
+        if (
+            p.mouseX < 0 ||
+            p.mouseY < 0 ||
+            p.mouseX > p.width ||
+            p.mouseY > p.height
+        ) {
+            return;
+        }
+        // When color panel is open - do not process click
+        if (colorPalette?.isAllowedToDraw() === false) {
             return;
         }
         // Call mouseClicked is it exists in selectec tool

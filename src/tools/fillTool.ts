@@ -4,7 +4,6 @@ import { IconType, Tool } from './tool';
 
 type ColorArray = [number, number, number, number];
 
-// Not stable, can't achive stable performace with p5
 export class FillTool extends Tool {
     name = 'fill';
     icon = 'fa-solid fa-fill';
@@ -21,36 +20,69 @@ export class FillTool extends Tool {
         // do nothing
     }
 
-    mouseClicked(e?: object) {
+    mouseClicked() {
+        const rowSizeInPixels = this.p.width * this.density * 4;
+
         const fillColor: ColorArray = [
             this.colorPalette.currentColor.red,
             this.colorPalette.currentColor.green,
             this.colorPalette.currentColor.blue,
-            255 * this.colorPalette.currentColor.alpha,
+            255,
         ];
         this.p.loadPixels();
 
         const initialColor = this.getPixelColor(this.p.mouseX, this.p.mouseY);
 
-        console.log(this.density, fillColor, initialColor);
+        console.log(
+            this.p.mouseX,
+            this.p.mouseY,
+            this.p.width,
+            this.density,
+            fillColor,
+            initialColor
+        );
 
         let queue = [];
         queue.push(this.p.createVector(this.p.mouseX, this.p.mouseY));
 
         while (queue.length) {
             const current = queue.shift();
-            const currentIndex = 4 * (this.p.width * current.y + current.x);
+            const currentIndex = this.getPixelOffset(current.x, current.y);
             const currentColor = this.getPixelColor(current.x, current.y);
 
-            if (!this.isColorsEqual(currentColor, initialColor)) {
+            if (
+                !this.arrayEquals(currentColor, initialColor) ||
+                this.arrayEquals(currentColor, fillColor)
+            ) {
                 continue;
             }
 
-            for (let i = 0; i < 4; i++) {
-                this.p.pixels[currentIndex + i] = fillColor[0 + i];
+            for (let colorIndex = 0; colorIndex < 4; colorIndex++) {
+                for (
+                    let columnIndex = 0;
+                    columnIndex < this.density;
+                    columnIndex++
+                ) {
+                    for (
+                        let rowIndex = 0;
+                        rowIndex < this.density;
+                        rowIndex++
+                    ) {
+                        this.p.pixels[
+                            currentIndex +
+                                colorIndex +
+                                rowSizeInPixels * rowIndex +
+                                4 * columnIndex
+                        ] = fillColor[colorIndex];
+                    }
+                }
             }
 
             queue = this.expandToNeighbours(queue, current);
+            if (queue.length > 20000) {
+                console.log('Queue is too big', queue.length);
+                break;
+            }
         }
 
         this.p.updatePixels();
@@ -60,27 +92,32 @@ export class FillTool extends Tool {
         const x = current.x;
         const y = current.y;
 
-        if (x - 1 > 0) {
+        if (x > 0) {
             queue.push(this.p.createVector(x - 1, y));
         }
-
-        if (x + 1 < this.p.width) {
+        if (x < this.p.width) {
             queue.push(this.p.createVector(x + 1, y));
         }
-
-        if (y - 1 > 0) {
+        if (y > 0) {
             queue.push(this.p.createVector(x, y - 1));
         }
-
-        if (y + 1 < this.p.height) {
+        if (y < this.p.height) {
             queue.push(this.p.createVector(x, y + 1));
         }
 
         return queue;
     }
 
+    getPixelOffset(x: number, y: number): number {
+        return (
+            4 *
+            (this.p.width * this.density * (y * this.density) +
+                x * this.density)
+        );
+    }
+
     getPixelColor(x: number, y: number): ColorArray {
-        const off = 4 * (this.p.width * y + x) * this.density;
+        const off = this.getPixelOffset(x, y);
         return [
             this.p.pixels[off],
             this.p.pixels[off + 1],
@@ -89,12 +126,12 @@ export class FillTool extends Tool {
         ];
     }
 
-    isColorsEqual(c1: ColorArray, c2: ColorArray): boolean {
-        for (let i = 0; i < 4; i++) {
-            if (c1[i] != c2[i]) {
-                return false;
-            }
-        }
-        return true;
+    arrayEquals(a, b) {
+        return (
+            Array.isArray(a) &&
+            Array.isArray(b) &&
+            a.length === b.length &&
+            a.every((val, index) => val === b[index])
+        );
     }
 }
