@@ -14,6 +14,7 @@ export interface ITool {
     draw(): void;
     populateOptions?(): void;
     unselectTool?(): void;
+    mouseClicked?(e?: object): void;
 }
 
 export abstract class Tool implements ITool {

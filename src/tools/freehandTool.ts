@@ -22,7 +22,6 @@ export class PencilTool extends Tool {
     draw() {
         //if the mouse is pressed
         if (this.p.mouseIsPressed) {
-            console.log(this.p.mouseX, this.p.mouseY);
             //check if they previousX and Y are -1. set them to the current
             //mouse X and Y if they are.
             if (this.previousMouseX == -1) {

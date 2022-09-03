@@ -2,7 +2,7 @@ import P5 from 'p5';
 
 import { HelperFunctions } from './helperFunctions';
 import { Toolbox } from './toolbox';
-import { ColourPalette } from './colourPalette';
+import { ColorPalette } from './colourPalette';
 
 import { PencilTool } from './tools/freehandTool';
 import { LineToTool } from './tools/lineToTool';
@@ -13,7 +13,7 @@ import { CircleTool } from './tools/circleTool';
 
 const sketch = function (p: P5) {
     const toolbox = new Toolbox(p);
-    let colorPalette: ColourPalette | undefined;
+    let colorPalette: ColorPalette | undefined;
 
     p.setup = function () {
         const canvasContainer = p.select('#content');
@@ -25,7 +25,7 @@ const sketch = function (p: P5) {
 
         //create helper functions and the colour palette
         new HelperFunctions(p);
-        colorPalette = new ColourPalette(p);
+        colorPalette = new ColorPalette(p);
 
         //add the tools to the toolbox.
         toolbox.addTool(new PencilTool(p));
@@ -34,6 +34,7 @@ const sketch = function (p: P5) {
         toolbox.addTool(new RirrorDrawTool(p));
         toolbox.addTool(new RectangleTool(p));
         toolbox.addTool(new CircleTool(p));
+        // toolbox.addTool(new FillTool(p, colorPalette));
         p.background(255);
     };
 
@@ -52,6 +53,17 @@ const sketch = function (p: P5) {
             toolbox.selectedTool.draw();
         } else {
             alert("it doesn't look like your tool has a draw method!");
+        }
+    };
+
+    p.mouseClicked = (e) => {
+        // Do not process clicks out the canvas
+        if (p.mouseX < 0 || p.mouseY < 0) {
+            return;
+        }
+        // Call mouseClicked is it exists in selectec tool
+        if (typeof toolbox.selectedTool['mouseClicked'] == 'function') {
+            toolbox.selectedTool.mouseClicked();
         }
     };
 };
