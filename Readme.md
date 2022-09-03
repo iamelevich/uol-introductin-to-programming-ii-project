@@ -27,8 +27,7 @@ Run `pnpm build` to build prod version in `dist` folder
 - [ ] Add type choosing option where it possible (circle, rectangle, pencil and etc.)
 - [ ] Change cursor for each tool where it's possible
 - [ ] Add Erase tool
-- [ ] Add Fill with color tool
-- [ ] Add text tool ??
+- [x] Add Fill with color tool
 - [x] Add Rectangle tool
 - [x] Add Circle tool
 - [ ] Add Polygon tool
