@@ -6,6 +6,7 @@ const SIDEBAR_ITEM_ACTIVE_CLASSES = 'border-2 border-slate-600';
 
 //container object for storing the tools. Functions to add new tools and select a tool
 export function Toolbox(p: P5) {
+  // eslint-disable-next-line @typescript-eslint/no-this-alias
   const self = this;
 
   this.tools = [];

@@ -1,7 +1,8 @@
 import type P5 from 'p5';
-import { IconType, ITool } from './tool';
+import { SizeOption } from '../options/size';
+import { IconType, Tool } from './tool';
 
-export class LineToTool implements ITool {
+export class LineToTool extends Tool {
   icon = 'assets/lineTo.jpg';
   name = 'line-to';
   iconType = IconType.Image;
@@ -10,7 +11,12 @@ export class LineToTool implements ITool {
   startMouseY = -1;
   drawing = false;
 
-  constructor(private p: P5) {}
+  constructor(p: P5) {
+	super(p);
+	this.options.push(new SizeOption(p, (value: number) => {
+		this.p.strokeWeight(value);
+	}));
+  }
 
   draw() {
     if (this.p.mouseIsPressed) {
@@ -32,6 +38,7 @@ export class LineToTool implements ITool {
       this.drawing = false;
       this.startMouseX = -1;
       this.startMouseY = -1;
+	  this.p.loadPixels();
     }
   }
 }

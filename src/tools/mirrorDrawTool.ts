@@ -1,7 +1,7 @@
 import type P5 from 'p5';
-import { IconType, ITool } from './tool';
+import { IconType, Tool } from './tool';
 
-export class RirrorDrawTool implements ITool {
+export class RirrorDrawTool extends Tool {
   name = 'mirror-draw';
   icon = 'fa-regular fa-copy';
   iconType = IconType.FA;
@@ -11,7 +11,8 @@ export class RirrorDrawTool implements ITool {
   //line of symmetry is halfway across the screen
   lineOfSymmetry: number;
 
-  constructor(private p: P5) {
+  constructor(p: P5) {
+	super(p);
     this.lineOfSymmetry = this.p.width / 2;
   }
 
@@ -127,32 +128,24 @@ export class RirrorDrawTool implements ITool {
     }
   }
 
-  //when the tool is deselected update the pixels to just show the drawing and
-  //hide the line of symmetry. Also clear options
-  unselectTool() {
-    this.p.updatePixels();
-    //clear options
-    this.p.select('.options').html('');
-  }
-
   //adds a button and click handler to the options area. When clicked
   //toggle the line of symmetry between horizonatl to vertical
   populateOptions() {
-    const btnId = 'directionButton';
+    const btnId = 'direction-button';
     this.p
       .select('.options')
-      .html(`<button id='${btnId}'>Make Horizontal</button>`);
+      .html(`<button class="btn-options" id='${btnId}'><i class="fa-solid fa-grip-lines"></i></button>`);
     // 	//click handler
     this.p.select(`#${btnId}`).mouseClicked(() => {
       const button = this.p.select(`#${btnId}`);
       if (this.axis == 'x') {
         this.axis = 'y';
         this.lineOfSymmetry = this.p.height / 2;
-        button.html('Make Vertical');
+        button.html('<i class="fa-solid fa-grip-lines-vertical"></i>');
       } else {
         this.axis = 'x';
         this.lineOfSymmetry = this.p.width / 2;
-        button.html('Make Horizontal');
+        button.html('<i class="fa-solid fa-grip-lines"></i>');
       }
     });
   }

@@ -1,7 +1,6 @@
-import type P5 from 'p5';
-import { IconType, ITool } from './tool';
+import { IconType, Tool } from './tool';
 
-export class RectangleTool implements ITool {
+export class RectangleTool extends Tool {
   icon = 'fa-regular fa-square';
   name = 'rectangle';
   iconType = IconType.FA;
@@ -9,8 +8,6 @@ export class RectangleTool implements ITool {
   startMouseX = -1;
   startMouseY = -1;
   drawing = false;
-
-  constructor(private p: P5) {}
 
   draw() {
     if (this.p.mouseIsPressed) {
@@ -29,9 +26,10 @@ export class RectangleTool implements ITool {
         );
       }
     } else if (this.drawing) {
-      this.drawing = false;
-      this.startMouseX = -1;
-      this.startMouseY = -1;
+		this.drawing = false;
+		this.startMouseX = -1;
+		this.startMouseY = -1;
+		this.p.loadPixels();
     }
   }
 }

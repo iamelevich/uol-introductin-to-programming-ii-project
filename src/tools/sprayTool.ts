@@ -1,14 +1,11 @@
-import type P5 from 'p5';
-import { IconType, ITool } from './tool';
+import { IconType, Tool } from './tool';
 
-export class SprayTool implements ITool {
+export class SprayTool extends Tool {
   name = 'spray';
   icon = 'fa-solid fa-spray-can';
   iconType = IconType.FA;
   points = 13;
   spread = 10;
-
-  constructor(private p: P5) {}
 
   draw() {
     //if the mouse is pressed paint on the canvas
@@ -27,6 +24,7 @@ export class SprayTool implements ITool {
           )
         );
       }
+      this.p.loadPixels();
     }
   }
 }

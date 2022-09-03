@@ -38,13 +38,20 @@ const sketch = function (p: P5) {
   };
 
   p.draw = function () {
+    // Do not process clicks out the canvas
+	if (p.mouseX < 0 || p.mouseY < 0) {
+		return;
+	}
+    // When color panel is open - do not process click
     if (colorPalette?.isAllowedToDraw() === false) {
         return;
     }
+
+    // Process draw() function of the selected tool
     if (typeof toolbox.selectedTool['draw'] == 'function') {
       toolbox.selectedTool.draw();
     } else {
-      alert("it doesn't look like your tool has a draw method!");
+      alert('it doesn\'t look like your tool has a draw method!');
     }
   };
 };

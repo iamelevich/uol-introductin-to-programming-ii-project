@@ -4,6 +4,7 @@ specifiers:
   '@jaames/iro': ^5.5.2
   '@parcel/config-default': ^2.6.2
   '@parcel/core': ^2.7.0
+  '@tailwindcss/forms': ^0.5.3
   '@types/p5': ^1.4.2
   '@typescript-eslint/eslint-plugin': ^5.29.0
   '@typescript-eslint/parser': ^5.29.0
@@ -26,6 +27,7 @@ dependencies:
 devDependencies:
   '@parcel/config-default': 2.6.2_shdqhynvzslzlpwcunisasy46q
   '@parcel/core': 2.7.0
+  '@tailwindcss/forms': 0.5.3_tailwindcss@3.1.8
   '@types/p5': 1.4.2
   '@typescript-eslint/eslint-plugin': 5.29.0_6qxxupv7mxgh2x33m2mhhiawee
   '@typescript-eslint/parser': 5.29.0_hxadhbs2xogijvk7vq4t2azzbu
@@ -1734,6 +1736,15 @@ packages:
     resolution: {integrity: sha512-556Az0VX7WR6UdoTn4htt/l3zPQ7bsQWK+HqdG4swV7beUCxo/BqmvbOpUkTIm/9ih86LIf1qsUnywNL3obGHw==}
     dependencies:
       tslib: 2.4.0
+    dev: true
+
+  /@tailwindcss/forms/0.5.3_tailwindcss@3.1.8:
+    resolution: {integrity: sha512-y5mb86JUoiUgBjY/o6FJSFZSEttfb3Q5gllE4xoKjAAD+vBrnIhE4dViwUuow3va8mpH4s9jyUbUbrRGoRdc2Q==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || >= 3.0.0-alpha.1'
+    dependencies:
+      mini-svg-data-uri: 1.4.4
+      tailwindcss: 3.1.8_postcss@8.4.16
     dev: true
 
   /@trysound/sax/0.2.0:
@@ -3546,6 +3557,11 @@ packages:
   /mime/1.6.0:
     resolution: {integrity: sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==}
     engines: {node: '>=4'}
+    hasBin: true
+    dev: true
+
+  /mini-svg-data-uri/1.4.4:
+    resolution: {integrity: sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==}
     hasBin: true
     dev: true
 

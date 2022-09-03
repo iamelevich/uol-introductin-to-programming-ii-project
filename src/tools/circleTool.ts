@@ -1,7 +1,6 @@
-import type P5 from 'p5';
-import { IconType, ITool } from './tool';
+import { IconType, Tool } from './tool';
 
-export class CircleTool implements ITool {
+export class CircleTool extends Tool {
   icon = 'fa-regular fa-circle';
   name = 'circle';
   iconType = IconType.FA;
@@ -9,8 +8,6 @@ export class CircleTool implements ITool {
   startMouseX = -1;
   startMouseY = -1;
   drawing = false;
-
-  constructor(private p: P5) {}
 
   draw() {
     if (this.p.mouseIsPressed) {

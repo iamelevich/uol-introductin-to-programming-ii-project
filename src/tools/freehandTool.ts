@@ -1,7 +1,8 @@
 import type P5 from 'p5';
-import { IconType, ITool } from './tool';
+import { SizeOption } from '../options/size';
+import { IconType, Tool } from './tool';
 
-export class PencilTool implements ITool {
+export class PencilTool extends Tool {
   icon = 'fa-solid fa-pencil';
   name = 'pencil';
   iconType = IconType.FA;
@@ -9,11 +10,17 @@ export class PencilTool implements ITool {
   previousMouseX = -1;
   previousMouseY = -1;
 
-  constructor(private p: P5) {}
+  constructor(p: P5) {
+	super(p);
+	this.options.push(new SizeOption(p, (value: number) => {
+		this.p.strokeWeight(value);
+	}));
+  }
 
   draw() {
     //if the mouse is pressed
     if (this.p.mouseIsPressed) {
+		console.log(this.p.mouseX, this.p.mouseY);
       //check if they previousX and Y are -1. set them to the current
       //mouse X and Y if they are.
       if (this.previousMouseX == -1) {
@@ -29,6 +36,7 @@ export class PencilTool implements ITool {
           this.p.mouseX,
           this.p.mouseY
         );
+		this.p.loadPixels();
         this.previousMouseX = this.p.mouseX;
         this.previousMouseY = this.p.mouseY;
       }
