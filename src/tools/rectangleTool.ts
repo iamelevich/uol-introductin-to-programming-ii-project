@@ -63,7 +63,7 @@ export class RectangleTool extends Tool {
             } else {
                 this.p.updatePixels();
                 if (this.fillType === FillType.NoFill) {
-                    this.p.fill(255, 255, 255, 0);
+                    this.p.noFill();
                 } else {
                     this.p.fill(this.colorPalette.currentColor.hexString);
                 }

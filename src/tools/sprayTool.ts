@@ -1,5 +1,6 @@
 import type P5 from 'p5';
 import { RangeOption } from '../options/range';
+import { isMouseInCanvas } from '../utils/utils';
 import { IconType, Tool, ToolConfig } from './tool';
 
 export class SprayTool extends Tool {
@@ -48,7 +49,7 @@ export class SprayTool extends Tool {
         //if the mouse is pressed paint on the canvas
         //spread describes how far to spread the paint from the mouse pointer
         //points holds how many pixels of paint for each mouse press.
-        if (this.p.mouseIsPressed) {
+        if (this.p.mouseIsPressed && isMouseInCanvas(this.p)) {
             for (let i = 0; i < this.points; i++) {
                 this.p.point(
                     this.p.random(

@@ -1,5 +1,6 @@
 import type P5 from 'p5';
 import { RangeOption } from '../options/range';
+import { isMouseInCanvas } from '../utils/utils';
 import { IconType, Tool, ToolConfig } from './tool';
 
 export class PencilTool extends Tool {
@@ -23,7 +24,7 @@ export class PencilTool extends Tool {
     draw() {
         this.p.updatePixels();
         //if the mouse is pressed
-        if (this.p.mouseIsPressed) {
+        if (this.p.mouseIsPressed && isMouseInCanvas(this.p)) {
             //check if they previousX and Y are -1. set them to the current
             //mouse X and Y if they are.
             if (this.previousMouseX == -1) {

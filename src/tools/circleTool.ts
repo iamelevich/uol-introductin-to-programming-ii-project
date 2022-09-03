@@ -1,6 +1,7 @@
 import type P5 from 'p5';
 import { ColorPalette } from '../colourPalette';
 import { VariantOption } from '../options/variants';
+import { isMouseInCanvas } from '../utils/utils';
 import { IconType, Tool, ToolConfig } from './tool';
 
 enum FillType {
@@ -54,7 +55,7 @@ export class CircleTool extends Tool {
     }
 
     draw() {
-        if (this.p.mouseIsPressed) {
+        if (this.p.mouseIsPressed && isMouseInCanvas(this.p)) {
             if (this.startMouseX == -1) {
                 this.startMouseX = this.p.mouseX;
                 this.startMouseY = this.p.mouseY;
@@ -63,7 +64,7 @@ export class CircleTool extends Tool {
             } else {
                 this.p.updatePixels();
                 if (this.fillType === FillType.NoFill) {
-                    this.p.fill(255, 255, 255, 0);
+                    this.p.noFill();
                 } else {
                     this.p.fill(this.colorPalette.currentColor.hexString);
                 }

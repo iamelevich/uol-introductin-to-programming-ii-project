@@ -1,6 +1,7 @@
 import type P5 from 'p5';
 import { RangeOption } from '../options/range';
 import { VariantOption } from '../options/variants';
+import { isMouseInCanvas } from '../utils/utils';
 import { IconType, Tool, ToolConfig } from './tool';
 
 export class RirrorDrawTool extends Tool {
@@ -69,7 +70,7 @@ export class RirrorDrawTool extends Tool {
         this.p.updatePixels();
 
         //do the drawing if the mouse is pressed
-        if (this.p.mouseIsPressed) {
+        if (this.p.mouseIsPressed && isMouseInCanvas(this.p)) {
             //if the previous values are -1 set them to the current mouse location
             //and mirrored positions
             if (this.previousMouseX == -1) {

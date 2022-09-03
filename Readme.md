@@ -24,10 +24,10 @@ Run `pnpm build` to build prod version in `dist` folder
 - [x] Improve color choosing like in paint
 - [x] Improve top menu to looks good
 - [x] Improve desing of the app
-- [ ] Add type choosing option where it possible (circle, rectangle, pencil and etc.)
-- [ ] Change cursor for each tool where it's possible
-- [ ] Add Erase tool
+- [x] Add type choosing option where it possible (circle, rectangle, pencil and etc.)
+- [x] Change cursor for each tool where it's possible
 - [x] Add Fill with color tool
 - [x] Add Rectangle tool
 - [x] Add Circle tool
-- [ ] Add Polygon tool
+- [x] Add Grayscale filter
+- [x] Add blur filter

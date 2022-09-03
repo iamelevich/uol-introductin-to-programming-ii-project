@@ -1,5 +1,6 @@
 import type P5 from 'p5';
 import { RangeOption } from '../options/range';
+import { isMouseInCanvas } from '../utils/utils';
 import { IconType, Tool, ToolConfig } from './tool';
 
 export class LineToTool extends Tool {
@@ -22,7 +23,7 @@ export class LineToTool extends Tool {
     }
 
     draw() {
-        if (this.p.mouseIsPressed) {
+        if (this.p.mouseIsPressed && isMouseInCanvas(this.p)) {
             if (this.startMouseX == -1) {
                 this.startMouseX = this.p.mouseX;
                 this.startMouseY = this.p.mouseY;

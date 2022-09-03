@@ -12,6 +12,9 @@ import { RectangleTool } from './tools/rectangleTool';
 import { CircleTool } from './tools/circleTool';
 import { FillTool } from './tools/fillTool';
 import { PixelHelper } from './utils/pixelHelper';
+import { GrayscaleFilter } from './filters/grayscale';
+import { isMouseInCanvas } from './utils/utils';
+import { BlurFilter } from './filters/blur';
 
 const sketch = function (p: P5) {
     const toolbox = new Toolbox(p);
@@ -38,6 +41,11 @@ const sketch = function (p: P5) {
         toolbox.addTool(new RectangleTool(p, colorPalette));
         toolbox.addTool(new CircleTool(p, colorPalette));
         toolbox.addTool(new FillTool(p, colorPalette, pixelHelper));
+
+        // Init filters
+        new GrayscaleFilter(p, pixelHelper);
+        new BlurFilter(p, pixelHelper);
+        
         p.background(255);
     };
 
@@ -57,12 +65,7 @@ const sketch = function (p: P5) {
 
     p.mouseClicked = (e) => {
         // Do not process clicks out the canvas
-        if (
-            p.mouseX < 0 ||
-            p.mouseY < 0 ||
-            p.mouseX > p.width ||
-            p.mouseY > p.height
-        ) {
+        if (!isMouseInCanvas(p)) {
             return;
         }
         // When color panel is open - do not process click
