@@ -1,57 +1,64 @@
 import type P5 from 'p5';
+import iro from '@jaames/iro';
 
 //Displays and handles the colour palette.
 export class ColourPalette {
-	colours = ['black', 'silver', 'gray', 'white', 'maroon', 'red', 'purple',
-		'orange', 'pink', 'fuchsia', 'green', 'lime', 'olive', 'yellow', 'navy',
-		'blue', 'teal', 'aqua'
-	];
-	selectedColour = 'black';
 
-	constructor(private p: P5) {
-		this.loadColours();
-	}
+  readonly colourPaletteIdentifier = '.colour-palette';
+  readonly colourPickerIdentifier = '.colour-picker';
+  readonly defaultColor = '#ada1df';
+  readonly colorPickerWidth = 150;
 
-	//load in the colours
-	loadColours() {
-		const colourClick = (event) => {
-			//remove the old border
-			const current = this.p.select('#' + this.selectedColour + 'Swatch');
-			current.style('border', '0');
+  colourPaletteElement: P5.Element;
+  colourPickerElement: P5.Element;
+  colourPickerElementRect: { left: number, right: number, top: number, bottom: number } = {
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+  };
+  isColorPickerElementOpen = false;
 
-			//get the new colour from the id of the clicked element
-			const newColorElement = this.p.select(`#${event.target.id}`);
-			const c = newColorElement.id().split('Swatch')[0];
+  constructor(private p: P5) {
+    this.colourPaletteElement = this.p.select(this.colourPaletteIdentifier);
+    this.colourPickerElement = this.p.select(this.colourPickerIdentifier)
+    this.loadColours();
+  }
 
-			//set the selected colour and fill and stroke
-			this.selectedColour = c;
-			this.p.fill(c);
-			this.p.stroke(c);
+  //load in the colours
+  loadColours() {
+    const colorPicker = new iro.ColorPicker(this.colourPickerIdentifier, {
+      width: this.colorPickerWidth,
+      color: this.defaultColor
+    });
 
-			//add a new border to the selected colour
-			newColorElement.style('border', '2px solid blue');
-		}
+    colorPicker.on(['color:init', 'color:change'], (color) => {
+      this.p.fill(color.hexString);
+      this.p.stroke(color.hexString);
+      this.colourPaletteElement.style('background-color', color.hexString);
+    });
 
-		//set the fill and stroke properties to be black at the start of the programme
-		//running
-		this.p.fill(this.colours[0]);
-		this.p.stroke(this.colours[0]);
+    this.colourPaletteElement.mouseClicked(() => {
+      this.colourPickerElement.toggleClass('hidden');
+      if (this.colourPickerElement.hasClass('hidden')) {
+        this.isColorPickerElementOpen = false;
+      } else {
+        this.isColorPickerElementOpen = true;
+        this.colourPickerElementRect = this.colourPickerElement.elt.getBoundingClientRect();
+      }
+    });
+  }
 
-		//for each colour create a new div in the html for the colourSwatches
-		for (let i = 0; i < this.colours.length; i++) {
-			const colourID = this.colours[i] + 'Swatch';
-
-			//using p5.dom add the swatch to the palette and set its background colour
-			//to be the colour value.
-			const colourSwatch = this.p.createDiv()
-			colourSwatch.class('colourSwatches');
-			colourSwatch.id(colourID);
-
-			this.p.select('.colourPalette').child(colourSwatch);
-			this.p.select('#' + colourID).style('background-color', this.colours[i]);
-			colourSwatch.mouseClicked(colourClick)
-		}
-
-		this.p.select('.colourSwatches').style('border', '2px solid blue');
-	}
+  isAllowedToDraw() {
+    if (!this.isColorPickerElementOpen) {
+      return true;
+    }
+    if (
+      this.p.winMouseX >= this.colourPickerElementRect.left && this.p.winMouseX <= this.colourPickerElementRect.right &&
+      this.p.winMouseY >= this.colourPickerElementRect.top && this.p.winMouseY <= this.colourPickerElementRect.bottom
+    ) {
+      return false;
+    }
+    return true;
+  }
 }
