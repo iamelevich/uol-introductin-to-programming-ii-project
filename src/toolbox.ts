@@ -80,6 +80,12 @@ export function Toolbox(p: P5) {
                     SIDEBAR_ITEM_ACTIVE_CLASSES
                 );
 
+                if (
+                    typeof this.selectedTool['selectTool'] === 'function'
+                ) {
+                    this.selectedTool.selectTool();
+                }
+
                 //if the tool has an options area. Populate it now.
                 if (
                     typeof this.selectedTool['populateOptions'] === 'function'

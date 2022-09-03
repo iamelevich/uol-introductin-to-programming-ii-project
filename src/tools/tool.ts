@@ -13,19 +13,55 @@ export interface ITool {
     options: ToolOption[];
     draw(): void;
     populateOptions?(): void;
+    selectTool?(): void;
     unselectTool?(): void;
     mouseClicked?(e?: object): void;
 }
 
+export type ToolConfig = {
+    name?: string;
+    icon?: string;
+    iconType?: IconType;
+    cursorClass?: string;
+}
+
 export abstract class Tool implements ITool {
-    name = 'tool';
-    icon = 'no icon';
-    iconType = IconType.FA;
+    name: string;
+    icon: string;
+    cursorClass: string;
+    iconType: IconType;
     options: ToolOption[] = [];
 
-    constructor(protected p: P5) {}
+    constructor(
+        protected p: P5,
+        {
+            name,
+            icon,
+            iconType = IconType.FA,
+            cursorClass = 'cursor-pencil',
+        }: ToolConfig = {}
+    ) {
+        this.name = name;
+        this.icon = icon;
+        this.iconType = iconType;
+        this.cursorClass = cursorClass;
+    }
 
     abstract draw(): void;
+
+    /**
+     * Call on tool select each time. Here basic action - to change cursor
+     */
+    selectTool(): void {
+        const contentElement = this.p.select('#content');
+        const cursorClasses = contentElement.class()
+            .split(' ')
+            .filter(classElelemt => /^cursor-.*/.test(classElelemt));
+        for (const classElement of cursorClasses) {
+            contentElement.removeClass(classElement);
+        }
+        contentElement.addClass(this.cursorClass);
+    }
 
     //when the tool is deselected update the pixels to just show the drawing and
     //hide the line of symmetry. Also clear options

@@ -1,17 +1,18 @@
 import type P5 from 'p5';
 import { RangeOption } from '../options/range';
-import { IconType, Tool } from './tool';
+import { IconType, Tool, ToolConfig } from './tool';
 
 export class PencilTool extends Tool {
-    icon = 'fa-solid fa-pencil';
-    name = 'pencil';
-    iconType = IconType.FA;
-
     previousMouseX = -1;
     previousMouseY = -1;
 
-    constructor(p: P5) {
-        super(p);
+    constructor(p: P5, config: ToolConfig = {}) {
+        super(p, {
+            name: 'pencil',
+            icon: 'fa-solid fa-pencil',
+            iconType: IconType.FA, 
+            ...config
+        });
         this.options.push(
             new RangeOption(p, (value: number) => {
                 this.p.strokeWeight(value);
@@ -20,6 +21,7 @@ export class PencilTool extends Tool {
     }
 
     draw() {
+        this.p.updatePixels();
         //if the mouse is pressed
         if (this.p.mouseIsPressed) {
             //check if they previousX and Y are -1. set them to the current
@@ -48,6 +50,16 @@ export class PencilTool extends Tool {
         else {
             this.previousMouseX = -1;
             this.previousMouseY = -1;
+
+            this.p.loadPixels();
+            this.p.push();
+            this.p.line(
+                this.p.mouseX,
+                this.p.mouseY,
+                this.p.mouseX,
+                this.p.mouseY
+            );
+            this.p.pop();
         }
     }
 

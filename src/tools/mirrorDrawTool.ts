@@ -1,19 +1,58 @@
 import type P5 from 'p5';
-import { IconType, Tool } from './tool';
+import { RangeOption } from '../options/range';
+import { VariantOption } from '../options/variants';
+import { IconType, Tool, ToolConfig } from './tool';
 
 export class RirrorDrawTool extends Tool {
-    name = 'mirror-draw';
-    icon = 'fa-regular fa-copy';
-    iconType = IconType.FA;
-
     //which axis is being mirrored (x or y) x is default
     axis = 'x';
     //line of symmetry is halfway across the screen
     lineOfSymmetry: number;
 
-    constructor(p: P5) {
-        super(p);
+    constructor(p: P5, config: ToolConfig = {}) {
+        super(p, {
+            name: 'mirror-draw',
+            icon: 'fa-regular fa-copy',
+            iconType: IconType.FA, 
+            ...config
+        });
         this.lineOfSymmetry = this.p.width / 2;
+
+        this.options.push(
+            new RangeOption(p, (value: number) => {
+                this.p.strokeWeight(value);
+            })
+        );
+
+        this.options.push(
+            new VariantOption<'x' | 'y'>(
+                p,
+                (val) => {
+                    this.axis = val;
+                    if (val == 'y') {
+                        this.lineOfSymmetry = this.p.height / 2;
+                    } else {
+                        this.lineOfSymmetry = this.p.width / 2;
+                    }
+                },
+                {
+                    variants: [
+                        {
+                            name: 'x-axis',
+                            icon: 'fa-solid fa-grip-lines',
+                            value: 'y',
+                            isActive: false
+                        },
+                        {
+                            name: 'y-axis',
+                            icon: 'fa-solid fa-grip-lines-vertical',
+                            value: 'x',
+                            isActive: true
+                        }
+                    ],
+                }
+            )
+        );
     }
 
     //where was the mouse on the last time draw was called.
@@ -128,27 +167,9 @@ export class RirrorDrawTool extends Tool {
         }
     }
 
-    //adds a button and click handler to the options area. When clicked
-    //toggle the line of symmetry between horizonatl to vertical
-    populateOptions() {
-        const btnId = 'direction-button';
-        this.p
-            .select('.options')
-            .html(
-                `<button class="btn-options" id='${btnId}'><i class="fa-solid fa-grip-lines"></i></button>`
-            );
-        // 	//click handler
-        this.p.select(`#${btnId}`).mouseClicked(() => {
-            const button = this.p.select(`#${btnId}`);
-            if (this.axis == 'x') {
-                this.axis = 'y';
-                this.lineOfSymmetry = this.p.height / 2;
-                button.html('<i class="fa-solid fa-grip-lines-vertical"></i>');
-            } else {
-                this.axis = 'x';
-                this.lineOfSymmetry = this.p.width / 2;
-                button.html('<i class="fa-solid fa-grip-lines"></i>');
-            }
-        });
+    // Reset strokeWeight to 1
+    unselectTool(): void {
+        super.unselectTool();
+        this.p.strokeWeight(1);
     }
 }

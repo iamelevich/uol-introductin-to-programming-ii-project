@@ -7,11 +7,23 @@
         @apply h-10 m-1 py-1 px-2 bg-slate-500 text-white rounded-lg shadow-md hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-opacity-75;
     }
 
-    .btn-options {
-        @apply h-10 w-10 m-1 py-1 px-2 bg-slate-200 text-black rounded-lg shadow-md hover:bg-slate-300;
+    .btn-option {
+        @apply h-8 w-8 bg-slate-200 text-black rounded-lg shadow-md hover:bg-slate-300;
+    }
+
+    .btn-option-active {
+        @apply ring-2 ring-slate-600;
     }
 
     .cursor-pencil {
         cursor: url(../assets/pencil.png) 0 32, auto;
+    }
+
+    .cursor-fill {
+        cursor: url(../assets/fill.png) 1 28, auto;
+    }
+
+    .cursor-spray {
+        cursor: url(../assets/spray.png) 0 3, auto;
     }
 }

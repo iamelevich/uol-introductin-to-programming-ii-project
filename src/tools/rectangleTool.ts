@@ -1,13 +1,57 @@
-import { IconType, Tool } from './tool';
+import type P5 from 'p5';
+import { ColorPalette } from '../colourPalette';
+import { VariantOption } from '../options/variants';
+import { IconType, Tool, ToolConfig } from './tool';
+
+enum FillType {
+    Fill = 'fill',
+    NoFill = 'no-fill'
+}
 
 export class RectangleTool extends Tool {
-    icon = 'fa-regular fa-square';
-    name = 'rectangle';
-    iconType = IconType.FA;
-
     startMouseX = -1;
     startMouseY = -1;
     drawing = false;
+
+    fillType = FillType.Fill;
+
+    constructor(
+        p: P5,
+        private colorPalette: ColorPalette,
+        config: ToolConfig = {}
+    ) {
+        super(p, {
+            name: 'rectangle',
+            icon: 'fa-regular fa-square',
+            iconType: IconType.FA, 
+            ...config
+        });
+
+        this.options.push(
+            new VariantOption<FillType>(
+                p,
+                (val) => {
+                    this.fillType = val;
+                },
+                {
+                    variants: [
+                        {
+                            name: 'fill',
+                            icon: 'fa-solid fa-square',
+                            value: FillType.Fill,
+                            isActive: true
+                        },
+                        {
+                            name: 'no-fill',
+                            icon: 'fa-regular fa-square',
+                            value: FillType.NoFill,
+                            isActive: false
+                        }
+                    ],
+                }
+            )
+        );
+    }
 
     draw() {
         if (this.p.mouseIsPressed) {
@@ -18,6 +62,11 @@ export class RectangleTool extends Tool {
                 this.p.loadPixels();
             } else {
                 this.p.updatePixels();
+                if (this.fillType === FillType.NoFill) {
+                    this.p.fill(255, 255, 255, 0);
+                } else {
+                    this.p.fill(this.colorPalette.currentColor.hexString);
+                }
                 this.p.rect(
                     this.startMouseX,
                     this.startMouseY,

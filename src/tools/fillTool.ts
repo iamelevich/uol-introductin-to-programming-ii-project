@@ -1,18 +1,24 @@
 import type P5 from 'p5';
 import { ColorPalette } from '../colourPalette';
-import { IconType, Tool } from './tool';
-
-type ColorArray = [number, number, number, number];
+import { ColorArray, PixelHelper } from '../utils/pixelHelper';
+import { IconType, Tool, ToolConfig } from './tool';
 
 export class FillTool extends Tool {
-    name = 'fill';
-    icon = 'fa-solid fa-fill';
-    iconType = IconType.FA;
-
     density: number;
 
-    constructor(p: P5, private colorPalette: ColorPalette) {
-        super(p);
+    constructor(
+        p: P5,
+        private colorPalette: ColorPalette,
+        private pixelHelper: PixelHelper,
+        config: ToolConfig = {}
+    ) {
+        super(p, {
+            name: 'fill',
+            icon: 'fa-solid fa-fill',
+            iconType: IconType.FA,
+            cursorClass: 'cursor-fill', 
+            ...config
+        });
         this.density = this.p.pixelDensity();
     }
 
@@ -21,8 +27,6 @@ export class FillTool extends Tool {
     }
 
     mouseClicked() {
-        const rowSizeInPixels = this.p.width * this.density * 4;
-
         const fillColor: ColorArray = [
             this.colorPalette.currentColor.red,
             this.colorPalette.currentColor.green,
@@ -31,7 +35,7 @@ export class FillTool extends Tool {
         ];
         this.p.loadPixels();
 
-        const initialColor = this.getPixelColor(this.p.mouseX, this.p.mouseY);
+        const initialColor = this.pixelHelper.getPixelColor(this.p.mouseX, this.p.mouseY);
 
         console.log(
             this.p.mouseX,
@@ -47,8 +51,7 @@ export class FillTool extends Tool {
 
         while (queue.length) {
             const current = queue.shift();
-            const currentIndex = this.getPixelOffset(current.x, current.y);
-            const currentColor = this.getPixelColor(current.x, current.y);
+            const currentColor = this.pixelHelper.getPixelColor(current.x, current.y);
 
             if (
                 !this.arrayEquals(currentColor, initialColor) ||
@@ -57,26 +60,8 @@ export class FillTool extends Tool {
                 continue;
             }
 
-            for (let colorIndex = 0; colorIndex < 4; colorIndex++) {
-                for (
-                    let columnIndex = 0;
-                    columnIndex < this.density;
-                    columnIndex++
-                ) {
-                    for (
-                        let rowIndex = 0;
-                        rowIndex < this.density;
-                        rowIndex++
-                    ) {
-                        this.p.pixels[
-                            currentIndex +
-                                colorIndex +
-                                rowSizeInPixels * rowIndex +
-                                4 * columnIndex
-                        ] = fillColor[colorIndex];
-                    }
-                }
-            }
+            // Fill pixel with color
+            this.pixelHelper.fillPixelWithColor(current.x, current.y, fillColor);
 
             queue = this.expandToNeighbours(queue, current);
             if (queue.length > 20000) {
@@ -108,25 +93,7 @@ export class FillTool extends Tool {
         return queue;
     }
 
-    getPixelOffset(x: number, y: number): number {
-        return (
-            4 *
-            (this.p.width * this.density * (y * this.density) +
-                x * this.density)
-        );
-    }
-
-    getPixelColor(x: number, y: number): ColorArray {
-        const off = this.getPixelOffset(x, y);
-        return [
-            this.p.pixels[off],
-            this.p.pixels[off + 1],
-            this.p.pixels[off + 2],
-            this.p.pixels[off + 3],
-        ];
-    }
-
-    arrayEquals(a, b) {
+    arrayEquals(a: ColorArray, b: ColorArray) {
         return (
             Array.isArray(a) &&
             Array.isArray(b) &&

@@ -1,6 +1,6 @@
 import P5 from 'p5';
 
-import { HelperFunctions } from './helperFunctions';
+import { HelperFunctions } from './utils/helperFunctions';
 import { Toolbox } from './toolbox';
 import { ColorPalette } from './colourPalette';
 
@@ -11,6 +11,7 @@ import { RirrorDrawTool } from './tools/mirrorDrawTool';
 import { RectangleTool } from './tools/rectangleTool';
 import { CircleTool } from './tools/circleTool';
 import { FillTool } from './tools/fillTool';
+import { PixelHelper } from './utils/pixelHelper';
 
 const sketch = function (p: P5) {
     const toolbox = new Toolbox(p);
@@ -27,28 +28,20 @@ const sketch = function (p: P5) {
         //create helper functions and the colour palette
         new HelperFunctions(p);
         colorPalette = new ColorPalette(p);
+        const pixelHelper = new PixelHelper(p, colorPalette);
 
         //add the tools to the toolbox.
         toolbox.addTool(new PencilTool(p));
         toolbox.addTool(new LineToTool(p));
         toolbox.addTool(new SprayTool(p));
         toolbox.addTool(new RirrorDrawTool(p));
-        toolbox.addTool(new RectangleTool(p));
-        toolbox.addTool(new CircleTool(p));
-        toolbox.addTool(new FillTool(p, colorPalette));
+        toolbox.addTool(new RectangleTool(p, colorPalette));
+        toolbox.addTool(new CircleTool(p, colorPalette));
+        toolbox.addTool(new FillTool(p, colorPalette, pixelHelper));
         p.background(255);
     };
 
     p.draw = function () {
-        // Do not process clicks out the canvas
-        if (
-            p.mouseX < 0 ||
-            p.mouseY < 0 ||
-            p.mouseX > p.width ||
-            p.mouseY > p.height
-        ) {
-            return;
-        }
         // When color panel is open - do not process click
         if (colorPalette?.isAllowedToDraw() === false) {
             return;

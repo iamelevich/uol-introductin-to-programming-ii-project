@@ -27,9 +27,7 @@ export class RangeOption extends ToolOption {
     }
 
     addToList(): void {
-        const normalizedLabel = this.options.label
-            .toLowerCase()
-            .replace(/\s/g, '-');
+        const normalizedLabel = this.normalize(this.options.label);
         const inputID = `${normalizedLabel}-range`;
         const textID = `${inputID}-text`;
         this.addNewOption(`

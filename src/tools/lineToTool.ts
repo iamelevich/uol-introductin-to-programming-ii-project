@@ -1,18 +1,19 @@
 import type P5 from 'p5';
 import { RangeOption } from '../options/range';
-import { IconType, Tool } from './tool';
+import { IconType, Tool, ToolConfig } from './tool';
 
 export class LineToTool extends Tool {
-    icon = 'assets/lineTo.jpg';
-    name = 'line-to';
-    iconType = IconType.Image;
-
     startMouseX = -1;
     startMouseY = -1;
     drawing = false;
 
-    constructor(p: P5) {
-        super(p);
+    constructor(p: P5, config: ToolConfig = {}) {
+        super(p, {
+            name: 'line-to',
+            icon: 'assets/lineTo.jpg',
+            iconType: IconType.Image, 
+            ...config
+        });
         this.options.push(
             new RangeOption(p, (value: number) => {
                 this.p.strokeWeight(value);

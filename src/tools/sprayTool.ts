@@ -1,16 +1,19 @@
 import type P5 from 'p5';
 import { RangeOption } from '../options/range';
-import { IconType, Tool } from './tool';
+import { IconType, Tool, ToolConfig } from './tool';
 
 export class SprayTool extends Tool {
-    name = 'spray';
-    icon = 'fa-solid fa-spray-can';
-    iconType = IconType.FA;
     points: number;
-    spread = 10;
+    spread: number;
 
-    constructor(p: P5) {
-        super(p);
+    constructor(p: P5, config: ToolConfig = {}) {
+        super(p, {
+            name: 'spray',
+            icon: 'fa-solid fa-spray-can',
+            iconType: IconType.FA,
+            cursorClass: 'cursor-spray',
+            ...config
+        });
         this.options.push(
             new RangeOption(
                 p,
