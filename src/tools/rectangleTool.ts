@@ -5,7 +5,7 @@ import { IconType, Tool, ToolConfig } from './tool';
 
 enum FillType {
     Fill = 'fill',
-    NoFill = 'no-fill'
+    NoFill = 'no-fill',
 }
 
 export class RectangleTool extends Tool {
@@ -23,8 +23,8 @@ export class RectangleTool extends Tool {
         super(p, {
             name: 'rectangle',
             icon: 'fa-regular fa-square',
-            iconType: IconType.FA, 
-            ...config
+            iconType: IconType.FA,
+            ...config,
         });
 
         this.options.push(
@@ -39,14 +39,14 @@ export class RectangleTool extends Tool {
                             name: 'fill',
                             icon: 'fa-solid fa-square',
                             value: FillType.Fill,
-                            isActive: true
+                            isActive: true,
                         },
                         {
                             name: 'no-fill',
                             icon: 'fa-regular fa-square',
                             value: FillType.NoFill,
-                            isActive: false
-                        }
+                            isActive: false,
+                        },
                     ],
                 }
             )

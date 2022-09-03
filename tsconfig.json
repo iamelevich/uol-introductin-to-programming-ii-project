@@ -1,8 +1,8 @@
 {
-  "compilerOptions": {
-    "allowJs": true,
-    "target": "es5",
-    "noEmit": true,
-    "esModuleInterop": true
-  }
+    "compilerOptions": {
+        "allowJs": true,
+        "target": "es5",
+        "noEmit": true,
+        "esModuleInterop": true
+    }
 }

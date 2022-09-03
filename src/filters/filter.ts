@@ -7,13 +7,20 @@ export type FilterConfig = {
 };
 
 export abstract class Filter {
-    constructor(protected p: P5, protected pixelHelper: PixelHelper, protected config: FilterConfig) {
+    constructor(
+        protected p: P5,
+        protected pixelHelper: PixelHelper,
+        protected config: FilterConfig
+    ) {
         const filtersElement = this.p.select('#filters');
-        filtersElement.html(`
+        filtersElement.html(
+            `
         <button class="btn-menu" id="${this.config.name}">
             ${this.config.text}
         </button>
-        `, true);
+        `,
+            true
+        );
 
         this.p.select(`#${this.config.name}`).mouseClicked(() => {
             this.apply();
@@ -21,6 +28,4 @@ export abstract class Filter {
     }
 
     abstract apply(): void;
-
-
 }

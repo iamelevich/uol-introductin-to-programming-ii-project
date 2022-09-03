@@ -45,7 +45,7 @@ const sketch = function (p: P5) {
         // Init filters
         new GrayscaleFilter(p, pixelHelper);
         new BlurFilter(p, pixelHelper);
-        
+
         p.background(255);
     };
 

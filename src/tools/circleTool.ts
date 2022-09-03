@@ -6,7 +6,7 @@ import { IconType, Tool, ToolConfig } from './tool';
 
 enum FillType {
     Fill = 'fill',
-    NoFill = 'no-fill'
+    NoFill = 'no-fill',
 }
 
 export class CircleTool extends Tool {
@@ -24,8 +24,8 @@ export class CircleTool extends Tool {
         super(p, {
             name: 'circle',
             icon: 'fa-regular fa-circle',
-            iconType: IconType.FA, 
-            ...config
+            iconType: IconType.FA,
+            ...config,
         });
 
         this.options.push(
@@ -40,14 +40,14 @@ export class CircleTool extends Tool {
                             name: 'fill',
                             icon: 'fa-solid fa-circle',
                             value: FillType.Fill,
-                            isActive: true
+                            isActive: true,
                         },
                         {
                             name: 'no-fill',
                             icon: 'fa-regular fa-circle',
                             value: FillType.NoFill,
-                            isActive: false
-                        }
+                            isActive: false,
+                        },
                     ],
                 }
             )

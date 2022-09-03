@@ -11,8 +11,8 @@ export class PencilTool extends Tool {
         super(p, {
             name: 'pencil',
             icon: 'fa-solid fa-pencil',
-            iconType: IconType.FA, 
-            ...config
+            iconType: IconType.FA,
+            ...config,
         });
         this.options.push(
             new RangeOption(p, (value: number) => {

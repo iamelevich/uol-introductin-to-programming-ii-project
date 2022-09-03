@@ -13,7 +13,7 @@ export class SprayTool extends Tool {
             icon: 'fa-solid fa-spray-can',
             iconType: IconType.FA,
             cursorClass: 'cursor-spray',
-            ...config
+            ...config,
         });
         this.options.push(
             new RangeOption(

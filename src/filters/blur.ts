@@ -6,7 +6,7 @@ export class BlurFilter extends Filter {
     constructor(p: P5, pixelHelper: PixelHelper) {
         super(p, pixelHelper, {
             name: 'blur-filter',
-            text: 'Blur'
+            text: 'Blur',
         });
     }
 

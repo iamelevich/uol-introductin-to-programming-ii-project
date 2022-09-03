@@ -14,8 +14,8 @@ export class RirrorDrawTool extends Tool {
         super(p, {
             name: 'mirror-draw',
             icon: 'fa-regular fa-copy',
-            iconType: IconType.FA, 
-            ...config
+            iconType: IconType.FA,
+            ...config,
         });
         this.lineOfSymmetry = this.p.width / 2;
 
@@ -42,14 +42,14 @@ export class RirrorDrawTool extends Tool {
                             name: 'x-axis',
                             icon: 'fa-solid fa-grip-lines',
                             value: 'y',
-                            isActive: false
+                            isActive: false,
                         },
                         {
                             name: 'y-axis',
                             icon: 'fa-solid fa-grip-lines-vertical',
                             value: 'x',
-                            isActive: true
-                        }
+                            isActive: true,
+                        },
                     ],
                 }
             )

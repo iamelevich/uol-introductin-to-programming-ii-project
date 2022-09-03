@@ -8,10 +8,7 @@ export class PixelHelper {
     pixelWidth: number;
     pixelRowSize: number;
 
-    constructor(
-        private p: P5,
-        private colorPalette: ColorPalette
-    ) {
+    constructor(private p: P5, private colorPalette: ColorPalette) {
         this.density = this.p.pixelDensity();
         this.pixelWidth = this.p.width * this.density;
         this.pixelRowSize = this.pixelWidth * 4;
@@ -28,11 +25,7 @@ export class PixelHelper {
     }
 
     getPixelOffset(x: number, y: number): number {
-        return (
-            4 *
-            (this.pixelWidth * (y * this.density) +
-                x * this.density)
-        );
+        return 4 * (this.pixelWidth * (y * this.density) + x * this.density);
     }
 
     fillPixelWithColor(x: number, y: number, fillColor: ColorArray) {
@@ -43,11 +36,7 @@ export class PixelHelper {
                 columnIndex < this.density;
                 columnIndex++
             ) {
-                for (
-                    let rowIndex = 0;
-                    rowIndex < this.density;
-                    rowIndex++
-                ) {
+                for (let rowIndex = 0; rowIndex < this.density; rowIndex++) {
                     this.p.pixels[
                         currentIndex +
                             colorIndex +
@@ -57,6 +46,5 @@ export class PixelHelper {
                 }
             }
         }
-
     }
 }

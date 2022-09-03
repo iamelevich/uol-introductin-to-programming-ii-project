@@ -16,8 +16,8 @@ export class FillTool extends Tool {
             name: 'fill',
             icon: 'fa-solid fa-fill',
             iconType: IconType.FA,
-            cursorClass: 'cursor-fill', 
-            ...config
+            cursorClass: 'cursor-fill',
+            ...config,
         });
         this.density = this.p.pixelDensity();
     }
@@ -35,15 +35,9 @@ export class FillTool extends Tool {
         ];
         this.p.loadPixels();
 
-        const initialColor = this.pixelHelper.getPixelColor(this.p.mouseX, this.p.mouseY);
-
-        console.log(
+        const initialColor = this.pixelHelper.getPixelColor(
             this.p.mouseX,
-            this.p.mouseY,
-            this.p.width,
-            this.density,
-            fillColor,
-            initialColor
+            this.p.mouseY
         );
 
         let queue = [];
@@ -51,7 +45,10 @@ export class FillTool extends Tool {
 
         while (queue.length) {
             const current = queue.shift();
-            const currentColor = this.pixelHelper.getPixelColor(current.x, current.y);
+            const currentColor = this.pixelHelper.getPixelColor(
+                current.x,
+                current.y
+            );
 
             if (
                 !this.arrayEquals(currentColor, initialColor) ||
@@ -61,7 +58,11 @@ export class FillTool extends Tool {
             }
 
             // Fill pixel with color
-            this.pixelHelper.fillPixelWithColor(current.x, current.y, fillColor);
+            this.pixelHelper.fillPixelWithColor(
+                current.x,
+                current.y,
+                fillColor
+            );
 
             queue = this.expandToNeighbours(queue, current);
             if (queue.length > 20000) {

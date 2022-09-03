@@ -9,8 +9,8 @@ export type VariantOptionConfigVariant<T> = {
     isActive: boolean;
     name: string;
     icon: string;
-    value: T
-}
+    value: T;
+};
 
 export class VariantOption<T> extends ToolOption {
     options: VariantOptionConfig<T>;
@@ -19,7 +19,7 @@ export class VariantOption<T> extends ToolOption {
         protected p: P5,
         protected cb: (value: T) => void,
         options: VariantOptionConfig<T> = {
-            variants: []
+            variants: [],
         }
     ) {
         super(p, cb);
@@ -33,7 +33,11 @@ export class VariantOption<T> extends ToolOption {
         for (const variant of this.options.variants) {
             const normalizedName = this.normalize(variant.name);
             this.addBlockOption(`
-                <button class="btn-option ${variant.isActive ? 'btn-option-active' : ''}" id='${normalizedName}'><i class="${variant.icon}"></i></button>
+                <button class="btn-option ${
+                    variant.isActive ? 'btn-option-active' : ''
+                }" id='${normalizedName}'><i class="${
+                variant.icon
+            }"></i></button>
             `);
             const btn = this.p.select(`#${normalizedName}`);
             btn.mouseClicked(() => {

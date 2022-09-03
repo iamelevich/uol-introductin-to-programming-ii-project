@@ -8,14 +8,21 @@ export class GrayscaleFilter extends Filter {
     constructor(p: P5, pixelHelper: PixelHelper) {
         super(p, pixelHelper, {
             name: 'grayscale-filter',
-            text: 'Grayscale'
+            text: 'Grayscale',
         });
     }
 
     apply() {
-        for (let i=0; i<this.p.pixels.length; i+=4) {
-            const averageValue = (this.p.pixels[i] + this.p.pixels[i+1] + this.p.pixels[i+2]) / 3;
-            const gray = Math.round(((averageValue / this.conversationalFactor) + 0.5) * this.conversationalFactor)
+        for (let i = 0; i < this.p.pixels.length; i += 4) {
+            const averageValue =
+                (this.p.pixels[i] +
+                    this.p.pixels[i + 1] +
+                    this.p.pixels[i + 2]) /
+                3;
+            const gray = Math.round(
+                (averageValue / this.conversationalFactor + 0.5) *
+                    this.conversationalFactor
+            );
             this.p.pixels[i] = gray;
             this.p.pixels[i + 1] = gray;
             this.p.pixels[i + 2] = gray;

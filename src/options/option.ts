@@ -10,8 +10,7 @@ export abstract class ToolOption {
     }
 
     normalize(s: string): string {
-        return s.toLowerCase()
-            .replace(/\s/g, '-');
+        return s.toLowerCase().replace(/\s/g, '-');
     }
 
     protected addNewOption(optionHTML: string): void {
@@ -21,7 +20,10 @@ export abstract class ToolOption {
         );
     }
 
-    protected addBlockOption(optionHTML: string, blockId = 'options-block'): void {
+    protected addBlockOption(
+        optionHTML: string,
+        blockId = 'options-block'
+    ): void {
         let blockElement = this.p.select(`${this.optionsSelector} #${blockId}`);
         if (!blockElement) {
             blockElement = this.p.createDiv();
@@ -29,10 +31,7 @@ export abstract class ToolOption {
             blockElement.class('grid grid-cols-2 justify-items-center');
             blockElement.parent(this.optionsElement);
         }
-        blockElement.html(
-            `${optionHTML}`,
-            true
-        );
+        blockElement.html(`${optionHTML}`, true);
     }
 
     abstract addToList(): void;

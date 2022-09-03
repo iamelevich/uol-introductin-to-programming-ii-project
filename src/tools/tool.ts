@@ -23,7 +23,7 @@ export type ToolConfig = {
     icon?: string;
     iconType?: IconType;
     cursorClass?: string;
-}
+};
 
 export abstract class Tool implements ITool {
     name: string;
@@ -54,9 +54,10 @@ export abstract class Tool implements ITool {
      */
     selectTool(): void {
         const contentElement = this.p.select('#content');
-        const cursorClasses = contentElement.class()
+        const cursorClasses = contentElement
+            .class()
             .split(' ')
-            .filter(classElelemt => /^cursor-.*/.test(classElelemt));
+            .filter((classElelemt) => /^cursor-.*/.test(classElelemt));
         for (const classElement of cursorClasses) {
             contentElement.removeClass(classElement);
         }

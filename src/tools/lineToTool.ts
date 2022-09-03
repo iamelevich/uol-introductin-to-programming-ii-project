@@ -12,8 +12,8 @@ export class LineToTool extends Tool {
         super(p, {
             name: 'line-to',
             icon: 'assets/lineTo.jpg',
-            iconType: IconType.Image, 
-            ...config
+            iconType: IconType.Image,
+            ...config,
         });
         this.options.push(
             new RangeOption(p, (value: number) => {
