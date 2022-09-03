@@ -53,12 +53,9 @@ export class ColourPalette {
     if (!this.isColorPickerElementOpen) {
       return true;
     }
-    if (
+    return !(
       this.p.winMouseX >= this.colourPickerElementRect.left && this.p.winMouseX <= this.colourPickerElementRect.right &&
       this.p.winMouseY >= this.colourPickerElementRect.top && this.p.winMouseY <= this.colourPickerElementRect.bottom
-    ) {
-      return false;
-    }
-    return true;
+    );
   }
 }

@@ -6,7 +6,7 @@ export function HelperFunctions(p: P5) {
   //be added to the button and doesn't 'belong' to the object
 
   //event handler for the clear button event. Clears the screen
-  p.select('#clearButton').mouseClicked(function () {
+  p.select('#clear-btn').mouseClicked(function () {
     p.background(255);
 
     //call loadPixels to update the drawing state
@@ -16,7 +16,7 @@ export function HelperFunctions(p: P5) {
 
   //event handler for the save image button. saves the canvsa to the
   //local file system.
-  p.select('#saveImageButton').mouseClicked(function () {
-    //???
+  p.select('#save-image-btn').mouseClicked(function () {
+    p.saveCanvas('my-super-picture', 'png');
   });
 }
