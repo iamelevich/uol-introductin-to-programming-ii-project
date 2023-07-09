@@ -1,0 +1,23 @@
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+        "@typescript-eslint",
+        "html"
+    ],
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:tailwindcss/recommended",
+        "prettier"
+    ],
+    "ignorePatterns": [
+        "*.css"
+    ],
+    "rules": {
+        // "quotes": [
+        //     "error",
+        //     "single"
+        // ]
+    }
+}

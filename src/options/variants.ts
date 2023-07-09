@@ -24,7 +24,6 @@ export class VariantOption<T> extends ToolOption {
     ) {
         super(p, cb);
         this.options = {
-            variants: [],
             ...options,
         };
     }
@@ -40,13 +39,13 @@ export class VariantOption<T> extends ToolOption {
             }"></i></button>
             `);
             const btn = this.p.select(`#${normalizedName}`);
-            btn.mouseClicked(() => {
+            btn?.mouseClicked(() => {
                 this.cb(variant.value);
                 const activeBtn = this.p.select('.btn-option-active');
                 if (activeBtn) {
                     activeBtn.removeClass('btn-option-active');
                 }
-                btn.addClass('btn-option-active');
+                btn?.addClass('btn-option-active');
             });
         }
     }

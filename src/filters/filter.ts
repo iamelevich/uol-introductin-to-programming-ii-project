@@ -13,7 +13,7 @@ export abstract class Filter {
         protected config: FilterConfig
     ) {
         const filtersElement = this.p.select('#filters');
-        filtersElement.html(
+        filtersElement?.html(
             `
         <button class="btn-menu" id="${this.config.name}">
             ${this.config.text}
@@ -22,7 +22,7 @@ export abstract class Filter {
             true
         );
 
-        this.p.select(`#${this.config.name}`).mouseClicked(() => {
+        this.p.select(`#${this.config.name}`)?.mouseClicked(() => {
             this.apply();
         });
     }

@@ -4,8 +4,8 @@ import { isMouseInCanvas } from '../utils/utils';
 import { IconType, Tool, ToolConfig } from './tool';
 
 export class SprayTool extends Tool {
-    points: number;
-    spread: number;
+    points = 13;
+    spread = 10;
 
     constructor(p: P5, config: ToolConfig = {}) {
         super(p, {

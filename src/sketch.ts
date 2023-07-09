@@ -23,13 +23,13 @@ const sketch = function (p: P5) {
     p.setup = function () {
         const canvasContainer = p.select('#content');
         const c = p.createCanvas(
-            (canvasContainer.size() as any).width,
-            (canvasContainer.size() as any).height
+            (canvasContainer?.size() as any).width,
+            (canvasContainer?.size() as any).height
         );
         c.parent('content');
 
         //create helper functions and the colour palette
-        new HelperFunctions(p);
+        HelperFunctions(p);
         colorPalette = new ColorPalette(p);
         const pixelHelper = new PixelHelper(p, colorPalette);
 
@@ -56,10 +56,13 @@ const sketch = function (p: P5) {
         }
 
         // Process draw() function of the selected tool
-        if (typeof toolbox.selectedTool['draw'] == 'function') {
+        if (
+            toolbox.selectedTool !== null &&
+            typeof toolbox.selectedTool['draw'] == 'function'
+        ) {
             toolbox.selectedTool.draw();
         } else {
-            alert("it doesn't look like your tool has a draw method!");
+            alert(`it doesn't look like your tool has a draw method!`);
         }
     };
 
@@ -73,7 +76,10 @@ const sketch = function (p: P5) {
             return;
         }
         // Call mouseClicked is it exists in selectec tool
-        if (typeof toolbox.selectedTool['mouseClicked'] == 'function') {
+        if (
+            toolbox.selectedTool !== null &&
+            typeof toolbox.selectedTool['mouseClicked'] == 'function'
+        ) {
             toolbox.selectedTool.mouseClicked();
         }
     };

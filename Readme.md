@@ -2,23 +2,30 @@
 
 Live view: https://iamelevich.github.io/uol-introductin-to-programming-ii-project/
 
+Deployed automatically by github actions.
+
 ## Requirements
 
-Any version of nodejs and pnpm (`npm i -g pnpm`). Tested on node version 18.8.0. You can use [asdf](https://asdf-vm.com/) to install it.
+- Node.js 18+
+- NPM 9+
 
 ## Preparation
 
-Install all deps: `pnpm i`
+Install all dependencies: `npm i`
 
-Basically all dependencies are dev, except of p5 and colorpicker.
+Basically all dependencies are dev, except of `p5` and `colorpicker`.
 
 ## Development
 
-Run `pnpm start` to run live server and watcher. After that you can access project by URL: `http://localhost:1234`
+As a build tool I use [Vite](https://vitejs.dev/). It's fast and easy to use, also it has built-in live server and hot reload.
+
+Run `npm run dev` to start development server.
 
 ## Production
 
-Run `pnpm build` to build prod version in `dist` folder.
+Run `npm run build` to build prod version in `dist` folder.
+
+To check prod version locally run `npm run preview`.
 
 ## Roadmap
 

@@ -11,7 +11,7 @@ export class LineToTool extends Tool {
     constructor(p: P5, config: ToolConfig = {}) {
         super(p, {
             name: 'line-to',
-            icon: 'assets/lineTo.jpg',
+            icon: './lineTo.jpg',
             iconType: IconType.Image,
             ...config,
         });

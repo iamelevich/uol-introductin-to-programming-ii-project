@@ -41,8 +41,8 @@ export abstract class Tool implements ITool {
             cursorClass = 'cursor-pencil',
         }: ToolConfig = {}
     ) {
-        this.name = name;
-        this.icon = icon;
+        this.name = name || 'unnamed';
+        this.icon = icon || 'fa-solid fa-circle';
         this.iconType = iconType;
         this.cursorClass = cursorClass;
     }
@@ -54,14 +54,16 @@ export abstract class Tool implements ITool {
      */
     selectTool(): void {
         const contentElement = this.p.select('#content');
-        const cursorClasses = contentElement
-            .class()
-            .split(' ')
-            .filter((classElelemt) => /^cursor-.*/.test(classElelemt));
-        for (const classElement of cursorClasses) {
-            contentElement.removeClass(classElement);
+        if (contentElement) {
+            const cursorClasses = contentElement
+                .class()
+                .split(' ')
+                .filter((classElelemt) => /^cursor-.*/.test(classElelemt));
+            for (const classElement of cursorClasses) {
+                contentElement.removeClass(classElement);
+            }
+            contentElement.addClass(this.cursorClass);
         }
-        contentElement.addClass(this.cursorClass);
     }
 
     //when the tool is deselected update the pixels to just show the drawing and
@@ -69,7 +71,7 @@ export abstract class Tool implements ITool {
     unselectTool() {
         this.p.updatePixels();
         //clear options
-        this.p.select('.options').html('');
+        this.p.select('.options')?.html('');
     }
 
     /**
