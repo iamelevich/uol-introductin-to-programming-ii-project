@@ -4,6 +4,9 @@ import { IconType, ITool } from './tools/tool';
 const SIDEBAR_ITEM_IDENTIFIER = 'sidebar-item';
 const SIDEBAR_ITEM_ACTIVE_CLASSES = 'border-2 border-slate-600';
 
+/**
+ * Toolbox class
+ */
 export class Toolbox {
     p: P5;
     tools: ITool[];
@@ -17,6 +20,9 @@ export class Toolbox {
 
         // eslint-disable-next-line @typescript-eslint/no-this-alias
         const self = this;
+        /**
+         * Handle click on toolbar item
+         */
         this.toolbarItemClick = function () {
             //remove any existing borders
             const items = self.p.selectAll(`.${SIDEBAR_ITEM_IDENTIFIER}`);
@@ -38,6 +44,10 @@ export class Toolbox {
         };
     }
 
+    /**
+     * Add a tool to the toolbox
+     * @param tool Tool to add to the toolbox
+     */
     addTool(tool: ITool) {
         //check that the object tool has an icon and a name
         if (!tool.icon || !tool.name) {
@@ -52,6 +62,10 @@ export class Toolbox {
         }
     }
 
+    /**
+     * Add a tool icon to the toolbox
+     * @param tool Tool to add to the toolbox
+     */
     addToolIcon(tool: ITool) {
         let divContent = '';
         if (tool.iconType == IconType.FA) {
@@ -68,6 +82,10 @@ export class Toolbox {
         sideBarItem.mouseClicked(this.toolbarItemClick);
     }
 
+    /**
+     * Select a tool from the toolbox
+     * @param toolName Name of the tool to select
+     */
     selectTool(toolName: string) {
         for (let i = 0; i < this.tools.length; i++) {
             if (this.tools[i].name == toolName) {

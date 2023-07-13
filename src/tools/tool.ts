@@ -11,6 +11,7 @@ export interface ITool {
     icon: string;
     iconType: IconType;
     options: ToolOption[];
+    cursorClass: string;
     draw(): void;
     populateOptions?(): void;
     selectTool?(): void;

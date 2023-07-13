@@ -4,7 +4,7 @@ import { VariantOption } from '../options/variants';
 import { isMouseInCanvas } from '../utils/utils';
 import { IconType, Tool, ToolConfig } from './tool';
 
-export class RirrorDrawTool extends Tool {
+export class MirrorDrawTool extends Tool {
     //which axis is being mirrored (x or y) x is default
     axis = 'x';
     //line of symmetry is halfway across the screen

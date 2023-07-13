@@ -54,6 +54,9 @@ export class CircleTool extends Tool {
         );
     }
 
+    /**
+     * Draw circle on mouse drag
+     */
     draw() {
         if (this.p.mouseIsPressed && isMouseInCanvas(this.p)) {
             if (this.startMouseX == -1) {

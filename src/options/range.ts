@@ -9,7 +9,7 @@ export type RangeOptionConfig = {
 };
 
 export class RangeOption extends ToolOption {
-    options: RangeOptionConfig;
+    options: Required<RangeOptionConfig>;
 
     constructor(
         protected p: P5,
@@ -41,10 +41,12 @@ export class RangeOption extends ToolOption {
         this.cb(this.options.initialValue);
         const rangeTextElement = this.p.select(`#${textID}`);
         const rangeElement = this.p.select(`#${inputID}`);
-        rangeElement.elt.addEventListener('input', (e: InputEvent) => {
-            e.preventDefault();
-            this.cb(rangeElement.value() as number);
-            rangeTextElement.html(rangeElement.value().toString());
-        });
+        if (rangeElement && rangeTextElement) {
+            rangeElement.elt.addEventListener('input', (e: InputEvent) => {
+                e.preventDefault();
+                this.cb(rangeElement.value() as number);
+                rangeTextElement.html(rangeElement.value().toString());
+            });
+        }
     }
 }

@@ -22,10 +22,16 @@ export class FillTool extends Tool {
         this.density = this.p.pixelDensity();
     }
 
+    /**
+     * Draw method, empty for this tool
+     */
     draw() {
         // do nothing
     }
 
+    /**
+     * Fill area with color on mouse click
+     */
     mouseClicked() {
         const fillColor: ColorArray = [
             this.colorPalette.currentColor.red,
@@ -45,6 +51,9 @@ export class FillTool extends Tool {
 
         while (queue.length) {
             const current = queue.shift();
+            if (!current) {
+                break;
+            }
             const currentColor = this.pixelHelper.getPixelColor(
                 current.x,
                 current.y
@@ -74,7 +83,13 @@ export class FillTool extends Tool {
         this.p.updatePixels();
     }
 
-    expandToNeighbours(queue: P5.Vector[], current: P5.Vector) {
+    /**
+     * Expand queue to neighbours
+     * @param queue Queue to expand
+     * @param current Current pixel
+     * @returns
+     */
+    expandToNeighbours(queue: P5.Vector[], current: P5.Vector): P5.Vector[] {
         const x = current.x;
         const y = current.y;
 
@@ -94,7 +109,13 @@ export class FillTool extends Tool {
         return queue;
     }
 
-    arrayEquals(a: ColorArray, b: ColorArray) {
+    /**
+     * Compare two arrays
+     * @param a First array
+     * @param b Second array
+     * @returns
+     */
+    arrayEquals(a: ColorArray, b: ColorArray): boolean {
         return (
             Array.isArray(a) &&
             Array.isArray(b) &&

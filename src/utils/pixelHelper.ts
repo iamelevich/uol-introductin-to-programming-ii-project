@@ -1,8 +1,14 @@
 import type P5 from 'p5';
 import { ColorPalette } from '../colourPalette';
 
+/**
+ * Color array type
+ */
 export type ColorArray = [number, number, number, number];
 
+/**
+ * Helper class to manipulate pixels
+ */
 export class PixelHelper {
     density: number;
     pixelWidth: number;
@@ -14,6 +20,12 @@ export class PixelHelper {
         this.pixelRowSize = this.pixelWidth * 4;
     }
 
+    /**
+     * Get the color of a pixel
+     * @param x X coordinate
+     * @param y Y coordinate
+     * @returns
+     */
     getPixelColor(x: number, y: number): ColorArray {
         const off = this.getPixelOffset(x, y);
         return [
@@ -24,10 +36,22 @@ export class PixelHelper {
         ];
     }
 
+    /**
+     * Get the offset of a pixel in P5's pixels array
+     * @param x X coordinate
+     * @param y Y coordinate
+     * @returns
+     */
     getPixelOffset(x: number, y: number): number {
         return 4 * (this.pixelWidth * (y * this.density) + x * this.density);
     }
 
+    /**
+     * Fill a pixel with a provided color
+     * @param x X coordinate
+     * @param y Y coordinate
+     * @param fillColor Color to fill the pixel with
+     */
     fillPixelWithColor(x: number, y: number, fillColor: ColorArray) {
         const currentIndex = this.getPixelOffset(x, y);
         for (let colorIndex = 0; colorIndex < 4; colorIndex++) {
