@@ -12,6 +12,7 @@ export abstract class Filter {
         protected pixelHelper: PixelHelper,
         protected config: FilterConfig
     ) {
+        // Create the button
         const filtersElement = this.p.select('#filters');
         filtersElement?.html(
             `
@@ -22,10 +23,14 @@ export abstract class Filter {
             true
         );
 
+        // Add the event listener
         this.p.select(`#${this.config.name}`)?.mouseClicked(() => {
             this.apply();
         });
     }
 
+    /**
+     * Apply the filter to the image
+     */
     abstract apply(): void;
 }
