@@ -1,3 +1,3 @@
 export default {
-    base: '/uol-introductin-to-programming-ii-project/',
+  base: '/uol-introductin-to-programming-ii-project/'
 };

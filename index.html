@@ -1,119 +1,90 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-    <head>
-        <script
-            src="./src/sketch.ts"
-            type="module"
-            type="text/javascript"
-        ></script>
-        <script
-            src="https://kit.fontawesome.com/301fc2a094.js"
-            crossorigin="anonymous"
-        ></script>
-        <link rel="stylesheet" type="text/css" href="./src/index.css" />
-    </head>
-    <body class="bg-slate-400">
-        <div class="flex h-screen">
-            <div class="fixed flex h-12 w-full">
-                <div class="m-2 flex-none text-lg italic text-slate-300">
-                    Draw it!
-                </div>
-                <div class="flex grow justify-end" id="filters"></div>
-                <div class="mr-3 flex grow justify-end">
-                    <button class="btn-menu" id="clear-btn">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
-                    <button class="btn-menu" id="save-image-btn">
-                        <i class="fa-solid fa-download"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="w-24 flex-none pl-2">
-                <div
-                    class="mt-12 grid grid-cols-2 border-slate-300 pb-2"
-                    id="sidebar"
-                ></div>
-                <div class="my-2">
-                    <div
-                        class="color-palette ml-8 h-8 w-8 cursor-pointer border-2 border-black hover:shadow-lg"
-                    ></div>
-                    <div
-                        class="color-picker fixed left-24 hidden rounded-lg border-2 bg-slate-300 p-2"
-                    ></div>
-                </div>
-                <div class="options"></div>
-            </div>
-            <div
-                class="cursor-pencil mb-4 ml-4 mr-4 mt-12 grow shadow-lg"
-                id="content"
-            ></div>
-
-            <div
-                id="modal"
-                tabindex="-1"
-                aria-hidden="true"
-                class="fixed left-0 right-0 top-0 z-50 hidden h-screen w-full overflow-y-auto overflow-x-hidden bg-slate-400/[.5] p-4 md:inset-0"
-            >
-                <div class="relative m-auto max-h-full w-full max-w-2xl">
-                    <!-- Modal content -->
-                    <div
-                        class="relative rounded-lg bg-white shadow dark:bg-gray-700"
-                    >
-                        <!-- Modal header -->
-                        <div
-                            class="flex items-start justify-between rounded-t border-b p-4 dark:border-gray-600"
-                        >
-                            <h3
-                                class="modal-title text-xl font-semibold text-gray-900 dark:text-white"
-                            >
-                                Modal Title
-                            </h3>
-                            <button
-                                type="button"
-                                class="modal-close ml-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >
-                                <svg
-                                    class="h-3 w-3"
-                                    aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 14 14"
-                                >
-                                    <path
-                                        stroke="currentColor"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                                    />
-                                </svg>
-                                <span class="sr-only">Close modal</span>
-                            </button>
-                        </div>
-                        <!-- Modal body -->
-                        <div
-                            class="modal-body space-y-6 p-6 text-gray-900 dark:text-white"
-                        ></div>
-                        <!-- Modal footer -->
-                        <div
-                            class="flex items-center space-x-2 rounded-b border-t border-gray-200 p-6 dark:border-gray-600"
-                        >
-                            <button
-                                type="button"
-                                class="modal-accept rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                            >
-                                Apply
-                            </button>
-                            <button
-                                type="button"
-                                class="modal-cancel rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:z-10 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-600"
-                            >
-                                Cancel
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <head>
+    <script src="./src/sketch.ts" type="module" type="text/javascript"></script>
+    <script src="https://kit.fontawesome.com/301fc2a094.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="./src/index.css" />
+  </head>
+  <body class="bg-slate-400">
+    <div class="flex h-screen">
+      <div class="fixed flex h-12 w-full">
+        <div class="m-2 flex-none text-lg italic text-slate-300">Draw it!</div>
+        <div class="flex grow justify-end" id="filters"></div>
+        <div class="mr-3 flex grow justify-end">
+          <button class="btn-menu" id="clear-btn">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+          <button class="btn-menu" id="save-image-btn">
+            <i class="fa-solid fa-download"></i>
+          </button>
         </div>
-    </body>
+      </div>
+      <div class="w-24 flex-none pl-2">
+        <div class="mt-12 grid grid-cols-2 border-slate-300 pb-2" id="sidebar"></div>
+        <div class="my-2">
+          <div class="color-palette ml-8 h-8 w-8 cursor-pointer border-2 border-black hover:shadow-lg"></div>
+          <div class="color-picker fixed left-24 hidden rounded-lg border-2 bg-slate-300 p-2"></div>
+        </div>
+        <div class="options"></div>
+      </div>
+      <div class="cursor-pencil mb-4 ml-4 mr-4 mt-12 grow shadow-lg" id="content"></div>
+
+      <div
+        id="modal"
+        tabindex="-1"
+        aria-hidden="true"
+        class="fixed left-0 right-0 top-0 z-50 hidden h-screen w-full overflow-y-auto overflow-x-hidden bg-slate-400/[.5] p-4 md:inset-0"
+      >
+        <div class="relative m-auto max-h-full w-full max-w-2xl">
+          <!-- Modal content -->
+          <div class="relative rounded-lg bg-white shadow dark:bg-gray-700">
+            <!-- Modal header -->
+            <div class="flex items-start justify-between rounded-t border-b p-4 dark:border-gray-600">
+              <h3 class="modal-title text-xl font-semibold text-gray-900 dark:text-white">Modal Title</h3>
+              <button
+                type="button"
+                class="modal-close ml-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+              >
+                <svg
+                  class="h-3 w-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                  />
+                </svg>
+                <span class="sr-only">Close modal</span>
+              </button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body space-y-6 p-6 text-gray-900 dark:text-white"></div>
+            <!-- Modal footer -->
+            <div
+              class="flex items-center space-x-2 rounded-b border-t border-gray-200 p-6 dark:border-gray-600"
+            >
+              <button
+                type="button"
+                class="modal-accept rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Apply
+              </button>
+              <button
+                type="button"
+                class="modal-cancel rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:z-10 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-600"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
