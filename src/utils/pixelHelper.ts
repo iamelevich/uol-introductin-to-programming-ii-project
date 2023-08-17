@@ -1,5 +1,4 @@
 import type P5 from 'p5';
-import { ColorPalette } from '../colourPalette';
 
 /**
  * Color array type
