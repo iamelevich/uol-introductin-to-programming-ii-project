@@ -38,7 +38,7 @@ const sketch = function (p: P5) {
         //create helper functions and the colour palette
         HelperFunctions(p);
         colorPalette = new ColorPalette(p);
-        const pixelHelper = new PixelHelper(p, colorPalette);
+        const pixelHelper = new PixelHelper(p);
 
         //add the tools to the toolbox.
         toolbox.addTool(new PencilTool(p));

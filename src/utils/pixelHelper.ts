@@ -10,11 +10,16 @@ export type ColorArray = [number, number, number, number];
  * Helper class to manipulate pixels
  */
 export class PixelHelper {
+    // The pixel density is used to calculate the pixel offset
     density: number;
+
+    // The pixel width is used to calculate the pixel offset
     pixelWidth: number;
+
+    // The pixel row size is used to calculate the pixel offset
     pixelRowSize: number;
 
-    constructor(private p: P5, private colorPalette: ColorPalette) {
+    constructor(private p: P5) {
         this.density = this.p.pixelDensity();
         this.pixelWidth = this.p.width * this.density;
         this.pixelRowSize = this.pixelWidth * 4;
