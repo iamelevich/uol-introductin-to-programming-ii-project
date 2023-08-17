@@ -1,6 +1,5 @@
 import P5 from 'p5';
 
-import { HelperFunctions } from './utils/helperFunctions';
 import { Toolbox } from './toolbox';
 import { ColorPalette } from './colourPalette';
 
@@ -15,6 +14,9 @@ import { PixelHelper } from './utils/pixelHelper';
 import { GrayscaleFilter } from './filters/grayscale';
 import { isMouseInCanvas } from './utils/utils';
 import { BlurFilter } from './filters/blur';
+import { Modal } from './utils/modal';
+import { InitClear } from './utils/clear';
+import { InitDownload } from './utils/download';
 
 /**
  * Sketch function
@@ -23,6 +25,7 @@ import { BlurFilter } from './filters/blur';
 const sketch = function (p: P5) {
     const toolbox = new Toolbox(p);
     let colorPalette: ColorPalette | undefined;
+    let modal: Modal | undefined;
 
     /**
      * Setup function
@@ -35,8 +38,16 @@ const sketch = function (p: P5) {
         );
         c.parent('content');
 
-        //create helper functions and the colour palette
-        HelperFunctions(p);
+        // Create modal
+        modal = new Modal(p, 'modal');
+
+        // Init clear button
+        InitClear(p, modal);
+
+        // Init download button
+        InitDownload(p, modal);
+
+        // Create color palette
         colorPalette = new ColorPalette(p);
         const pixelHelper = new PixelHelper(p);
 
@@ -61,8 +72,8 @@ const sketch = function (p: P5) {
      * @returns
      */
     p.draw = function () {
-        // When color panel is open - do not process click
-        if (colorPalette?.isAllowedToDraw() === false) {
+        // When color panel is open or modal is visible - do not process click
+        if (!colorPalette?.isAllowedToDraw() || modal?.isVisible()) {
             return;
         }
 
@@ -87,8 +98,9 @@ const sketch = function (p: P5) {
         if (!isMouseInCanvas(p)) {
             return;
         }
+        console.log(modal?.isVisible());
         // When color panel is open - do not process click
-        if (colorPalette?.isAllowedToDraw() === false) {
+        if (!colorPalette?.isAllowedToDraw() || modal?.isVisible()) {
             return;
         }
         // Call mouseClicked is it exists in selectec tool
