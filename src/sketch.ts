@@ -65,8 +65,8 @@ const sketch = function (p: P5) {
     toolbox.addTool(new FillTool(p, colorPalette, pixelHelper));
 
     // Init filters
-    new GrayscaleFilter(p, pixelHelper);
-    new BlurFilter(p, pixelHelper);
+    new GrayscaleFilter(p, pixelHelper, modal);
+    new BlurFilter(p, pixelHelper, modal);
 
     p.background(255);
   };

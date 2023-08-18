@@ -101,24 +101,25 @@ export class Modal {
     // Set the buttons
     if (options.buttons?.accept) {
       this.acceptButton.html(options.buttons.accept.text);
-      this.acceptButton.mouseClicked(() => {
-        options.buttons?.accept?.onClick?.();
-        options.onClose?.();
-        this.hide();
-      });
     } else {
       this.acceptButton.html('OK');
     }
+    this.acceptButton.mouseClicked(() => {
+      options.buttons?.accept?.onClick?.();
+      options.onClose?.();
+      this.hide();
+    });
+
     if (options.buttons?.cancel) {
       this.cancelButton.html(options.buttons.cancel.text);
-      this.cancelButton.mouseClicked(() => {
-        options.buttons?.cancel?.onClick?.();
-        options.onClose?.();
-        this.hide();
-      });
     } else {
       this.cancelButton.html('Cancel');
     }
+    this.cancelButton.mouseClicked(() => {
+      options.buttons?.cancel?.onClick?.();
+      options.onClose?.();
+      this.hide();
+    });
 
     this.closeButton.mouseClicked(() => {
       options.onClose?.();
