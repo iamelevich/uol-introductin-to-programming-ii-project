@@ -17,5 +17,6 @@ export class BlurFilter extends FilterWithNumberInput {
 
   apply() {
     this.p.filter(this.p.BLUR, (this.filterInput?.value() as number) || this.initialValue);
+    this.p.loadPixels();
   }
 }

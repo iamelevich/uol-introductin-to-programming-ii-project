@@ -3,6 +3,8 @@ import P5 from 'p5';
 import { ColorPalette } from './colourPalette';
 import { BlurFilter } from './filters/blur';
 import { GrayscaleFilter } from './filters/grayscale';
+import { InvertFilter } from './filters/invert';
+import { PosterizeFilter } from './filters/posterize';
 import { Toolbox } from './toolbox';
 import { CircleTool } from './tools/circleTool';
 import { FillTool } from './tools/fillTool';
@@ -16,7 +18,6 @@ import { InitDownload } from './utils/download';
 import { Modal } from './utils/modal';
 import { PixelHelper } from './utils/pixelHelper';
 import { isMouseInCanvas } from './utils/utils';
-import { PosterizeFilter } from './filters/posterize';
 
 type SizeType = {
   width: number;
@@ -69,6 +70,7 @@ const sketch = function (p: P5) {
     new GrayscaleFilter(p, pixelHelper, modal);
     new BlurFilter(p, pixelHelper, modal);
     new PosterizeFilter(p, pixelHelper, modal);
+    new InvertFilter(p, pixelHelper, modal);
 
     p.background(255);
   };

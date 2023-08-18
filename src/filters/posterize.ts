@@ -17,5 +17,6 @@ export class PosterizeFilter extends FilterWithNumberInput {
 
   apply() {
     this.p.filter(this.p.POSTERIZE, (this.filterInput?.value() as number) || this.initialValue);
+    this.p.loadPixels();
   }
 }

@@ -22,7 +22,11 @@ export abstract class Filter {
     }
 
     // Create the button
-    const btn = this.p.createButton(this.config.text).addClass('btn-menu').parent(filtersElement);
+    const btn = this.p
+      .createButton(this.config.text)
+      .id(this.config.name)
+      .addClass('btn-menu')
+      .parent(filtersElement);
 
     // Add the event listener
     btn.mouseClicked(() => {
