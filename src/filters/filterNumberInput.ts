@@ -33,7 +33,7 @@ export abstract class FilterWithNumberInput extends Filter {
   protected getModalContent(): string | P5.Element {
     const content = this.p.createDiv();
 
-    const filterValueElement = this.p.createSpan('4');
+    const filterValueElement = this.p.createSpan(this.initialValue.toString()).addClass('font-bold');
     this.p.createP(`${this.config.text}: `).parent(content).child(filterValueElement);
 
     this.filterInput = this.p
