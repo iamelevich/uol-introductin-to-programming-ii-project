@@ -16,17 +16,16 @@ export abstract class Filter {
   ) {
     // Create the button
     const filtersElement = this.p.select('#filters');
-    filtersElement?.html(
-      `
-        <button class="btn-menu" id="${this.config.name}">
-            ${this.config.text}
-        </button>
-        `,
-      true
-    );
+
+    if (!filtersElement) {
+      throw new Error('Filters element not found');
+    }
+
+    // Create the button
+    const btn = this.p.createButton(this.config.text).addClass('btn-menu').parent(filtersElement);
 
     // Add the event listener
-    this.p.select(`#${this.config.name}`)?.mouseClicked(() => {
+    btn.mouseClicked(() => {
       this.showModal();
     });
   }
