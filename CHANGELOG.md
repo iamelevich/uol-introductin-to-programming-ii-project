@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.1.0](https://github.com/iamelevich/uol-introductin-to-programming-ii-project/compare/v1.0.0...v1.1.0) (2023-08-18)
+
+
+### Features
+
+* add `invert` filter ([ca69041](https://github.com/iamelevich/uol-introductin-to-programming-ii-project/commit/ca69041181fd84ca20ee96505d14c69278a0f524))
+* add `posterize` filter ([f2f45ff](https://github.com/iamelevich/uol-introductin-to-programming-ii-project/commit/f2f45ffffa8a6d237cbac0d0d31ee5ca1dc347d1))
+* add modal to filters ([780fcee](https://github.com/iamelevich/uol-introductin-to-programming-ii-project/commit/780fceeadf3f48297574d2612d374d7df52072ed))
+* configurable blur filter ([780fcee](https://github.com/iamelevich/uol-introductin-to-programming-ii-project/commit/780fceeadf3f48297574d2612d374d7df52072ed))
+
 ## 1.0.0 (2023-08-17)
 
 
