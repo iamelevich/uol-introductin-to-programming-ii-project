@@ -9,7 +9,13 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint src/*",
-    "commitlint": "commitlint --edit"
+    "commitlint": "commitlint --edit",
+    "commit": "git-cz"
+  },
+  "config": {
+    "commitizen": {
+      "path": "@commitlint/cz-commitlint"
+    }
   },
   "keywords": [],
   "author": "Ilya Amelevich <ilya.amelevich@gmail.com>",
@@ -38,6 +44,7 @@
     "vite": "^4.4.9"
   },
   "dependencies": {
+    "@commitlint/cz-commitlint": "^17.7.1",
     "@jaames/iro": "^5.5.2",
     "p5": "^1.7.0"
   },
