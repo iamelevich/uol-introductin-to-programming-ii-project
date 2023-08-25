@@ -14,9 +14,9 @@ export type FilterWithNumberInputConfig = {
 export abstract class FilterWithNumberInput extends Filter {
   protected filterInput: P5.Element | undefined;
 
-  protected initialValue: number;
-  protected min: number;
-  protected max: number;
+  protected readonly initialValue: number;
+  protected readonly min: number;
+  protected readonly max: number;
 
   constructor(
     p: P5,

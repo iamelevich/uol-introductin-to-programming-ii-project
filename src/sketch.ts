@@ -86,11 +86,7 @@ const sketch = function (p: P5) {
     }
 
     // Process draw() function of the selected tool
-    if (toolbox.selectedTool !== null && typeof toolbox.selectedTool['draw'] == 'function') {
-      toolbox.selectedTool.draw();
-    } else {
-      alert(`it doesn't look like your tool has a draw method!`);
-    }
+    toolbox.draw();
   };
 
   /**
@@ -98,20 +94,17 @@ const sketch = function (p: P5) {
    * @param e MouseEvent
    * @returns
    */
-  p.mouseClicked = (e) => {
+  p.mouseClicked = () => {
     // Do not process clicks out the canvas
     if (!isMouseInCanvas(p)) {
       return;
     }
-    console.log(modal?.isVisible());
-    // When color panel is open - do not process click
+    // When color panel is open or modal is visible - do not process click
     if (!colorPalette?.isAllowedToDraw() || modal?.isVisible()) {
       return;
     }
-    // Call mouseClicked is it exists in selectec tool
-    if (toolbox.selectedTool !== null && typeof toolbox.selectedTool['mouseClicked'] == 'function') {
-      toolbox.selectedTool.mouseClicked();
-    }
+    // Call mouseClicked is it exists in selected tool
+    toolbox.mouseClicked();
   };
 };
 

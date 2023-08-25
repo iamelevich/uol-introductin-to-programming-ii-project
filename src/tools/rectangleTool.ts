@@ -12,11 +12,10 @@ enum FillType {
 }
 
 export class RectangleTool extends Tool {
-  startMouseX = -1;
-  startMouseY = -1;
-  drawing = false;
-
-  fillType = FillType.Fill;
+  private startMouseX = -1;
+  private startMouseY = -1;
+  private drawing = false;
+  private fillType = FillType.Fill;
 
   constructor(
     p: P5,

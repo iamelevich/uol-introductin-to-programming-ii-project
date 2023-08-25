@@ -14,7 +14,7 @@ export type VariantOptionConfigVariant<T> = {
 };
 
 export class VariantOption<T> extends ToolOption<T> {
-  options: VariantOptionConfig<T>;
+  private readonly options: VariantOptionConfig<T>;
 
   constructor(
     protected p: P5,

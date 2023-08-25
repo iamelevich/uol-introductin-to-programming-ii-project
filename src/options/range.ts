@@ -10,7 +10,7 @@ export type RangeOptionConfig = {
 };
 
 export class RangeOption extends ToolOption<number> {
-  options: Required<RangeOptionConfig>;
+  private readonly options: Required<RangeOptionConfig>;
 
   constructor(
     protected p: P5,

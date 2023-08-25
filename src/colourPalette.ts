@@ -2,17 +2,17 @@ import iro from '@jaames/iro';
 
 import type P5 from 'p5';
 
-//Displays and handles the colour palette.
+// Displays and handles the colour palette.
 export class ColorPalette {
-  readonly colorPaletteIdentifier = '.color-palette';
-  readonly colorPickerIdentifier = '.color-picker';
-  readonly defaultColor = '#ada1df';
-  readonly colorPickerWidth = 150;
+  private readonly colorPaletteIdentifier = '.color-palette';
+  private readonly colorPickerIdentifier = '.color-picker';
+  private readonly defaultColor = '#ada1df';
+  private readonly colorPickerWidth = 150;
 
-  colorPicker: iro.ColorPicker;
-  colorPaletteElement: P5.Element | null;
-  colorPickerElement: P5.Element | null;
-  colorPickerElementRect: {
+  private readonly colorPicker: iro.ColorPicker;
+  private readonly colorPaletteElement: P5.Element | null;
+  private readonly colorPickerElement: P5.Element | null;
+  private colorPickerElementRect: {
     left: number;
     right: number;
     top: number;
@@ -23,7 +23,7 @@ export class ColorPalette {
     top: 0,
     bottom: 0
   };
-  isColorPickerElementOpen = false;
+  private isColorPickerElementOpen = false;
 
   constructor(private p: P5) {
     this.colorPaletteElement = this.p.select(this.colorPaletteIdentifier);
@@ -35,6 +35,7 @@ export class ColorPalette {
       width: this.colorPickerWidth,
       color: this.defaultColor
     });
+    // Load event listeners for the color picker
     this.loadColors();
   }
 
@@ -46,8 +47,26 @@ export class ColorPalette {
     return this.colorPicker.color;
   }
 
-  //load in the colours
-  loadColors() {
+  /**
+   * Check is mouse is inside of the color picker element
+   * @returns {boolean} True if the mouse is allowed to draw, false otherwise
+   */
+  isAllowedToDraw(): boolean {
+    if (!this.isColorPickerElementOpen) {
+      return true;
+    }
+    return !(
+      this.p.winMouseX >= this.colorPickerElementRect.left &&
+      this.p.winMouseX <= this.colorPickerElementRect.right &&
+      this.p.winMouseY >= this.colorPickerElementRect.top &&
+      this.p.winMouseY <= this.colorPickerElementRect.bottom
+    );
+  }
+
+  /**
+   * Run from the constructor to load the colors
+   */
+  private loadColors() {
     this.colorPicker.on(['color:init', 'color:change'], (color: iro.Color) => {
       this.p.fill(color.hexString);
       this.p.stroke(color.hexString);
@@ -63,17 +82,5 @@ export class ColorPalette {
         this.colorPickerElementRect = this.colorPickerElement?.elt.getBoundingClientRect();
       }
     });
-  }
-
-  isAllowedToDraw() {
-    if (!this.isColorPickerElementOpen) {
-      return true;
-    }
-    return !(
-      this.p.winMouseX >= this.colorPickerElementRect.left &&
-      this.p.winMouseX <= this.colorPickerElementRect.right &&
-      this.p.winMouseY >= this.colorPickerElementRect.top &&
-      this.p.winMouseY <= this.colorPickerElementRect.bottom
-    );
   }
 }

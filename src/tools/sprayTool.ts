@@ -7,8 +7,8 @@ import type { ToolConfig } from './tool';
 import type P5 from 'p5';
 
 export class SprayTool extends Tool {
-  points = 13;
-  spread = 10;
+  private points = 13;
+  private spread = 10;
 
   constructor(p: P5, config: ToolConfig = {}) {
     super(p, {

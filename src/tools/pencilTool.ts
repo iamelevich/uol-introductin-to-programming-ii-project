@@ -7,8 +7,8 @@ import type { ToolConfig } from './tool';
 import type P5 from 'p5';
 
 export class PencilTool extends Tool {
-  previousMouseX = -1;
-  previousMouseY = -1;
+  private previousMouseX = -1;
+  private previousMouseY = -1;
 
   constructor(p: P5, config: ToolConfig = {}) {
     super(p, {

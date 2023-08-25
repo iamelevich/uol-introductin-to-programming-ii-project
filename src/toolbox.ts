@@ -10,10 +10,10 @@ const SIDEBAR_ITEM_ACTIVE_CLASSES = 'border-2 border-slate-600';
  * Toolbox class
  */
 export class Toolbox {
-  p: P5;
-  tools: ITool[];
-  selectedTool: ITool | null;
-  toolbarItemClick: () => void;
+  private readonly p: P5;
+  private readonly tools: ITool[];
+  private readonly toolbarItemClick: () => void;
+  private selectedTool: ITool | null;
 
   constructor(p: P5) {
     this.p = p;
@@ -104,6 +104,26 @@ export class Toolbox {
           this.selectedTool.populateOptions();
         }
       }
+    }
+  }
+
+  /**
+   * Process draw() event for the selected tool
+   */
+  draw() {
+    if (this.selectedTool !== null && typeof this.selectedTool['draw'] === 'function') {
+      this.selectedTool.draw();
+    } else {
+      alert(`it doesn't look like your tool has a draw method!`);
+    }
+  }
+
+  /**
+   * Process mouseClicked event for the selected tool
+   */
+  mouseClicked() {
+    if (this.selectedTool !== null && typeof this.selectedTool['mouseClicked'] === 'function') {
+      this.selectedTool.mouseClicked();
     }
   }
 }

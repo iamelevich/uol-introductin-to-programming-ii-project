@@ -6,7 +6,7 @@ import type P5 from 'p5';
 
 export class GrayscaleFilter extends Filter {
   // The conversational factor is used to round the average value to the nearest conversational factor
-  readonly conversationalFactor = 255 / 56;
+  private readonly conversationalFactor = 255 / 56;
 
   constructor(p: P5, pixelHelper: PixelHelper, modal: Modal) {
     super(p, pixelHelper, modal, {

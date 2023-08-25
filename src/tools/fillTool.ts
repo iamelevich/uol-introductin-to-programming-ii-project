@@ -6,8 +6,6 @@ import type { ColorArray, PixelHelper } from '../utils/pixelHelper';
 import type P5 from 'p5';
 
 export class FillTool extends Tool {
-  density: number;
-
   constructor(
     p: P5,
     private colorPalette: ColorPalette,
@@ -21,7 +19,6 @@ export class FillTool extends Tool {
       cursorClass: 'cursor-fill',
       ...config
     });
-    this.density = this.p.pixelDensity();
   }
 
   /**
@@ -78,7 +75,7 @@ export class FillTool extends Tool {
    * @param current Current pixel
    * @returns
    */
-  expandToNeighbours(queue: P5.Vector[], current: P5.Vector): P5.Vector[] {
+  private expandToNeighbours(queue: P5.Vector[], current: P5.Vector): P5.Vector[] {
     const x = current.x;
     const y = current.y;
 
@@ -104,7 +101,7 @@ export class FillTool extends Tool {
    * @param b Second array
    * @returns
    */
-  arrayEquals(a: ColorArray, b: ColorArray): boolean {
+  private arrayEquals(a: ColorArray, b: ColorArray): boolean {
     return (
       Array.isArray(a) &&
       Array.isArray(b) &&

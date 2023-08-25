@@ -44,8 +44,6 @@ export abstract class Tool implements ITool {
     this.cursorClass = cursorClass;
   }
 
-  abstract draw(): void;
-
   /**
    * Call on tool select each time. Here basic action - to change cursor
    */
@@ -79,4 +77,9 @@ export abstract class Tool implements ITool {
       option.addToList();
     }
   }
+
+  /**
+   * Draw method, should be implemented in child classes
+   */
+  abstract draw(): void;
 }

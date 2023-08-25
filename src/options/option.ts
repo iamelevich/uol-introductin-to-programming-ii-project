@@ -1,19 +1,14 @@
 import type P5 from 'p5';
 
 export abstract class ToolOption<T> {
-  readonly optionsSelector = '.options';
-
-  optionsElement: P5.Element | null = null;
+  private readonly optionsSelector = '.options';
+  private readonly optionsElement: P5.Element | null = null;
 
   constructor(
     protected p: P5,
     protected cb: (value: T) => void
   ) {
     this.optionsElement = this.p.select(this.optionsSelector);
-  }
-
-  normalize(s: string): string {
-    return s.toLowerCase().replace(/\s/g, '-');
   }
 
   protected addNewOption(optionHTML: string): void {
@@ -31,6 +26,15 @@ export abstract class ToolOption<T> {
       }
     }
     blockElement.html(`${optionHTML}`, true);
+  }
+
+  /**
+   * Normalize string to lowercase and replace spaces with dashes
+   * @param s string to normalize
+   * @returns normalized string
+   */
+  protected normalize(s: string): string {
+    return s.toLowerCase().replace(/\s/g, '-');
   }
 
   abstract addToList(): void;

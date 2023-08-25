@@ -9,9 +9,18 @@ import type P5 from 'p5';
 
 export class MirrorDrawTool extends Tool {
   //which axis is being mirrored (x or y) x is default
-  axis = 'x';
+  private axis = 'x';
   //line of symmetry is halfway across the screen
-  lineOfSymmetry: number;
+  private lineOfSymmetry: number;
+
+  //where was the mouse on the last time draw was called.
+  //set it to -1 to begin with
+  private previousMouseX = -1;
+  private previousMouseY = -1;
+
+  //mouse coordinates for the other side of the Line of symmetry.
+  private previousOppositeMouseX = -1;
+  private previousOppositeMouseY = -1;
 
   constructor(p: P5, config: ToolConfig = {}) {
     super(p, {
@@ -58,15 +67,6 @@ export class MirrorDrawTool extends Tool {
       )
     );
   }
-
-  //where was the mouse on the last time draw was called.
-  //set it to -1 to begin with
-  previousMouseX = -1;
-  previousMouseY = -1;
-
-  //mouse coordinates for the other side of the Line of symmetry.
-  previousOppositeMouseX = -1;
-  previousOppositeMouseY = -1;
 
   draw() {
     //display the last save state of pixels

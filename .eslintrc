@@ -76,6 +76,9 @@
         ],
         "newlines-between": "always"
       }
+    ],
+    "@typescript-eslint/member-ordering": [
+      "error"
     ]
   }
 }
