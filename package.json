@@ -7,9 +7,13 @@
   "main": "src/index.html",
   "scripts": {
     "build": "vite build",
+    "build:docker": "vite build --base=/",
     "commit": "git-cz",
     "commitlint": "commitlint --edit",
     "dev": "vite",
+    "docker:build": "docker build -t draw-it --target=production .",
+    "docker:start": "docker run --name draw-it -d -p 8080:80 draw-it",
+    "docker:stop": "docker stop draw-it && docker rm draw-it",
     "lint": "eslint src/*",
     "prepare": "husky install",
     "preview": "vite preview"
