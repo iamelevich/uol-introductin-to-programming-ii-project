@@ -4,6 +4,15 @@ Live view: https://iamelevich.github.io/uol-introductin-to-programming-ii-projec
 
 Deployed automatically by github actions.
 
+- [Drawer app for UoL Introduction to programming II](#drawer-app-for-uol-introduction-to-programming-ii)
+  - [Requirements](#requirements)
+  - [Preparation](#preparation)
+  - [Development](#development)
+    - [Code style and linting](#code-style-and-linting)
+  - [Production](#production)
+  - [Docker](#docker)
+  - [Available commands](#available-commands)
+
 ## Requirements
 
 - Node.js 18+
@@ -21,24 +30,42 @@ As a build tool I use [Vite](https://vitejs.dev/). It's fast and easy to use, al
 
 Run `npm run dev` to start development server.
 
+### Code style and linting
+
+I use [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/) to keep code style consistent.
+
+Run `npm run lint` to check code style.
+
+To prevent code style errors on commit I use [Husky](https://typicode.github.io/husky/#/) and [lint-staged](https://github.com/okonet/lint-staged).
+
+For release creating and commit linting I use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) and [Commitlint](https://commitlint.js.org/#/).
+
 ## Production
 
 Run `npm run build` to build prod version in `dist` folder.
 
 To check prod version locally run `npm run preview`.
 
-## Roadmap
+## Docker
 
--   [x] Use TypesScript
--   [x] Refactor template to use classes and etc
--   [x] Add option to change size for all tools
--   [x] Improve color choosing like in paint
--   [x] Improve top menu to looks good
--   [x] Improve desing of the app
--   [x] Add type choosing option where it possible (circle, rectangle, pencil and etc.)
--   [x] Change cursor for each tool where it's possible
--   [x] Add Fill with color tool
--   [x] Add Rectangle tool
--   [x] Add Circle tool
--   [x] Add Grayscale filter
--   [x] Add blur filter
+You can also build and test such image with docker.
+
+Build image: `npm run docker:build`
+
+Start container: `npm run docker:start`. After that you can open app on [http://localhost:8080](http://localhost:8080)
+
+Stop container: `npm run docker:stop`
+
+## Available commands
+
+| Command                | Description                    |
+| ---------------------- | ------------------------------ |
+| `npm run dev`          | Start development server       |
+| `npm run build`        | Build prod version             |
+| `npm run preview`      | Preview prod version           |
+| `npm run lint`         | Check code style               |
+| `npm run docker:build` | Build docker image             |
+| `npm run docker:start` | Start docker container         |
+| `npm run docker:stop`  | Stop docker container          |
+| `npm run commit`       | Commit changes with commitizen |
+| `npm run commitlint`   | Check commit message           |
