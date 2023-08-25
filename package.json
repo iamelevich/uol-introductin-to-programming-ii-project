@@ -20,13 +20,13 @@
     }
   },
   "dependencies": {
-    "@commitlint/cz-commitlint": "^17.7.1",
     "@jaames/iro": "^5.5.2",
     "p5": "^1.7.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
+    "@commitlint/cz-commitlint": "^17.7.1",
     "@tailwindcss/forms": "^0.5.4",
     "@types/p5": "^1.6.2",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
