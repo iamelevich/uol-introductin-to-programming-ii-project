@@ -36,9 +36,11 @@ function setupListeners(p: P5, modal: Modal, downloadButton: P5.Element) {
   // Element type is not correct in p5 types
   const typeRadio = p.createRadio('type').addClass('flex flex-col').parent(typeInputWrapper) as P5.Element & {
     option: (value: string) => void;
+    selected: (value: string) => void;
   };
   typeRadio.option('png');
   typeRadio.option('jpg');
+  typeRadio.selected('png');
 
   downloadButton.mouseClicked(() => {
     modal.show({
