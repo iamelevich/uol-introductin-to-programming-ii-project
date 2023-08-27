@@ -4,6 +4,9 @@ import type { Modal } from '../utils/modal';
 import type { PixelHelper } from '../utils/pixelHelper';
 import type P5 from 'p5';
 
+/**
+ * Grayscale filter class
+ */
 export class GrayscaleFilter extends Filter {
   // The conversational factor is used to round the average value to the nearest conversational factor
   private readonly conversationalFactor = 255 / 56;
@@ -15,6 +18,9 @@ export class GrayscaleFilter extends Filter {
     });
   }
 
+  /**
+   * Apply filter
+   */
   apply() {
     for (let i = 0; i < this.p.pixels.length; i += 4) {
       // Get the average value of the RGB components

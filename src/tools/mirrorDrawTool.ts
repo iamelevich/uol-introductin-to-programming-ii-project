@@ -31,12 +31,14 @@ export class MirrorDrawTool extends Tool {
     });
     this.lineOfSymmetry = this.p.width / 2;
 
+    // Add stroke weight option
     this.options.push(
       new RangeOption(p, (value: number) => {
         this.p.strokeWeight(value);
       })
     );
 
+    // Add axis option
     this.options.push(
       new VariantOption<'x' | 'y'>(
         p,

@@ -5,6 +5,7 @@ import type { Modal } from '../utils/modal';
 import type { PixelHelper } from '../utils/pixelHelper';
 import type P5 from 'p5';
 
+// Filter config type definition
 export type FilterWithNumberInputConfig = {
   initialValue: number;
   min: number;
@@ -12,8 +13,10 @@ export type FilterWithNumberInputConfig = {
 } & FilterConfig;
 
 export abstract class FilterWithNumberInput extends Filter {
+  // Filter input
   protected filterInput: P5.Element | undefined;
 
+  // Filter config
   protected readonly initialValue: number;
   protected readonly min: number;
   protected readonly max: number;
@@ -30,6 +33,10 @@ export abstract class FilterWithNumberInput extends Filter {
     this.max = max;
   }
 
+  /**
+   * Return modal content
+   * @returns Modal content
+   */
   protected getModalContent(): string | P5.Element {
     const content = this.p.createDiv();
 

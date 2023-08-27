@@ -1,11 +1,20 @@
 import type { Modal } from './modal';
 import type P5 from 'p5';
 
+/**
+ * Initializes the download button and its listeners
+ * @param p - P5 instance
+ * @param modal - Modal instance
+ * @param id - Id of the download button
+ */
 export function InitDownload(p: P5, modal: Modal, id = 'save-image-btn') {
+  // Select the download button
   const downloadButton = p.select(`#${id}`);
+  // Check if the download button exists
   if (!downloadButton) {
     throw new Error(`Download button with id ${id} not found`);
   }
+  // Setup listeners for the download button
   setupListeners(p, modal, downloadButton);
 }
 
@@ -38,10 +47,12 @@ function setupListeners(p: P5, modal: Modal, downloadButton: P5.Element) {
     option: (value: string) => void;
     selected: (value: string) => void;
   };
+  // Add download types
   typeRadio.option('png');
   typeRadio.option('jpg');
   typeRadio.selected('png');
 
+  // Add click listener to the download button. Shows a modal with the download setup element
   downloadButton.mouseClicked(() => {
     modal.show({
       title: 'Download image',
@@ -61,6 +72,12 @@ function setupListeners(p: P5, modal: Modal, downloadButton: P5.Element) {
   });
 }
 
+/**
+ * Downloads the canvas as an image
+ * @param p - P5 instance
+ * @param name - Name of the image
+ * @param type - Type of the image
+ */
 function download(p: P5, name: string, type: 'png' | 'jpg') {
   p.saveCanvas(name, type);
 }

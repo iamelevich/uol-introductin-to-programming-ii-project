@@ -1,5 +1,6 @@
 import type P5 from 'p5';
 
+// Options for the modal
 export type ModalShowOptions = {
   onShow?: () => void;
   onClose?: () => void;
@@ -17,7 +18,11 @@ export type ModalShowOptions = {
   };
 };
 
+/**
+ * Modal class
+ */
 export class Modal {
+  // Modal elements
   private modal: P5.Element;
   private title: P5.Element;
   private content: P5.Element;
@@ -29,11 +34,8 @@ export class Modal {
     private p: P5,
     private id: string
   ) {
-    const modal = this.p.select(`#${this.id}`);
-    if (!modal) {
-      throw new Error(`Modal with id ${this.id} not found`);
-    }
-    this.modal = modal;
+    // Select the modal elements
+    this.modal = this.selectElementOrThrow(`#${this.id}`);
     this.title = this.selectElementOrThrow(`#${this.id} .modal-title`);
     this.content = this.selectElementOrThrow(`#${this.id} .modal-body`);
     this.acceptButton = this.selectElementOrThrow(`#${this.id} .modal-accept`);
@@ -82,6 +84,7 @@ export class Modal {
    * ```
    */
   show(options: ModalShowOptions): void {
+    // Throw error if the modal is already visible
     if (this.isVisible()) {
       throw new Error('Modal is already visible');
     }
@@ -98,29 +101,33 @@ export class Modal {
       this.content.child(options.content);
     }
 
-    // Set the buttons
+    // Set the accept button
     if (options.buttons?.accept) {
       this.acceptButton.html(options.buttons.accept.text);
     } else {
       this.acceptButton.html('OK');
     }
+    // Add click listener to the accept button
     this.acceptButton.mouseClicked(() => {
       options.buttons?.accept?.onClick?.();
       options.onClose?.();
       this.hide();
     });
 
+    // Set the cancel button
     if (options.buttons?.cancel) {
       this.cancelButton.html(options.buttons.cancel.text);
     } else {
       this.cancelButton.html('Cancel');
     }
+    // Add click listener to the cancel button
     this.cancelButton.mouseClicked(() => {
       options.buttons?.cancel?.onClick?.();
       options.onClose?.();
       this.hide();
     });
 
+    // Add click listener to the close button
     this.closeButton.mouseClicked(() => {
       options.onClose?.();
       this.hide();
@@ -134,6 +141,7 @@ export class Modal {
    * Hides the modal
    */
   hide(): void {
+    // Hide the modal
     this.modal.addClass('hidden');
 
     // Remove the event listeners

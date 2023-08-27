@@ -4,6 +4,9 @@ import type { Modal } from '../utils/modal';
 import type { PixelHelper } from '../utils/pixelHelper';
 import type P5 from 'p5';
 
+/**
+ * Blur filter class
+ */
 export class BlurFilter extends FilterWithNumberInput {
   constructor(p: P5, pixelHelper: PixelHelper, modal: Modal) {
     super(p, pixelHelper, modal, {
@@ -15,6 +18,9 @@ export class BlurFilter extends FilterWithNumberInput {
     });
   }
 
+  /**
+   * Apply filter
+   */
   apply() {
     this.p.filter(this.p.BLUR, (this.filterInput?.value() as number) || this.initialValue);
     this.p.loadPixels();

@@ -29,6 +29,9 @@ export class VariantOption<T> extends ToolOption<T> {
     };
   }
 
+  /**
+   * Adds a new variant option to the options element
+   */
   addToList(): void {
     for (const variant of this.options.variants) {
       const normalizedName = this.normalize(variant.name);

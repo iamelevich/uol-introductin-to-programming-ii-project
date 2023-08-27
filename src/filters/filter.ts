@@ -2,11 +2,15 @@ import type { Modal } from '../utils/modal';
 import type { PixelHelper } from '../utils/pixelHelper';
 import type P5 from 'p5';
 
+// Filter config type definition
 export type FilterConfig = {
   name: string;
   text: string;
 };
 
+/**
+ * Filter base class
+ */
 export abstract class Filter {
   constructor(
     protected p: P5,

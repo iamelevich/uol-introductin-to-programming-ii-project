@@ -32,6 +32,7 @@ export class FillTool extends Tool {
    * Fill area with color on mouse click
    */
   mouseClicked() {
+    // Get fill color
     const fillColor: ColorArray = [
       this.colorPalette.currentColor.red,
       this.colorPalette.currentColor.green,
@@ -40,18 +41,26 @@ export class FillTool extends Tool {
     ];
     this.p.loadPixels();
 
+    // Get initial color
     const initialColor = this.pixelHelper.getPixelColor(this.p.mouseX, this.p.mouseY);
 
+    // Initialize queue
     let queue = [];
+    // Add current mouse position to queue
     queue.push(this.p.createVector(this.p.mouseX, this.p.mouseY));
 
+    // While queue is not empty
     while (queue.length) {
+      // Get current pixel
       const current = queue.shift();
+      // Check if current pixel exists
       if (!current) {
         break;
       }
+      // Get current pixel color
       const currentColor = this.pixelHelper.getPixelColor(current.x, current.y);
 
+      // Check if current pixel is not the initial color or the fill color
       if (!this.arrayEquals(currentColor, initialColor) || this.arrayEquals(currentColor, fillColor)) {
         continue;
       }
@@ -59,13 +68,16 @@ export class FillTool extends Tool {
       // Fill pixel with color
       this.pixelHelper.fillPixelWithColor(current.x, current.y, fillColor);
 
+      // Add neighbours to queue
       queue = this.expandToNeighbours(queue, current);
+      // Check if queue is too big and break if it is
       if (queue.length > 20000) {
         console.log('Queue is too big', queue.length);
         break;
       }
     }
 
+    // Update pixels
     this.p.updatePixels();
   }
 
@@ -76,9 +88,11 @@ export class FillTool extends Tool {
    * @returns
    */
   private expandToNeighbours(queue: P5.Vector[], current: P5.Vector): P5.Vector[] {
+    // Get current pixel coordinates
     const x = current.x;
     const y = current.y;
 
+    // Add neighbours to queue
     if (x > 0) {
       queue.push(this.p.createVector(x - 1, y));
     }

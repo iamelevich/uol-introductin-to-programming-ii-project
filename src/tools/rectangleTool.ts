@@ -29,6 +29,7 @@ export class RectangleTool extends Tool {
       ...config
     });
 
+    // Add fill type option
     this.options.push(
       new VariantOption<FillType>(
         p,
@@ -56,19 +57,25 @@ export class RectangleTool extends Tool {
   }
 
   draw() {
+    // If the mouse is pressed
     if (this.p.mouseIsPressed) {
+      // If the mouse is pressed for the first time
       if (this.startMouseX == -1) {
+        // Set state
         this.startMouseX = this.p.mouseX;
         this.startMouseY = this.p.mouseY;
         this.drawing = true;
         this.p.loadPixels();
       } else {
+        // Update the pixels
         this.p.updatePixels();
+        // Set the fill type
         if (this.fillType === FillType.NoFill) {
           this.p.noFill();
         } else {
           this.p.fill(this.colorPalette.currentColor.hexString);
         }
+        // Draw the rectangle
         this.p.rect(
           this.startMouseX,
           this.startMouseY,
@@ -77,6 +84,7 @@ export class RectangleTool extends Tool {
         );
       }
     } else if (this.drawing) {
+      // Reset state
       this.drawing = false;
       this.startMouseX = -1;
       this.startMouseY = -1;

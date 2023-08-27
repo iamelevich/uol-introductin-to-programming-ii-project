@@ -1,11 +1,13 @@
 import type { ToolOption } from '../options/option';
 import type P5 from 'p5';
 
+// IconType is used to determine the type of icon to use for the tool
 export enum IconType {
   FA = 'font-awesome',
   Image = 'image'
 }
 
+// Tool interface defines the methods and properties that all tools must implement
 export interface ITool {
   name: string;
   icon: string;
@@ -19,6 +21,7 @@ export interface ITool {
   mouseClicked?(e?: object): void;
 }
 
+// ToolConfig defines the properties that can be passed to the Tool constructor
 export type ToolConfig = {
   name?: string;
   icon?: string;
@@ -26,11 +29,23 @@ export type ToolConfig = {
   cursorClass?: string;
 };
 
+/**
+ * Base class for all tools
+ */
 export abstract class Tool implements ITool {
+  // Name of the tool
   name: string;
+
+  // Icon of the tool
   icon: string;
+
+  // Cursor class of the tool
   cursorClass: string;
+
+  // Icon type of the tool
   iconType: IconType;
+
+  // Array of tool options
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   options: ToolOption<any>[] = [];
 

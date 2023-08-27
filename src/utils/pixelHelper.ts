@@ -31,7 +31,9 @@ export class PixelHelper {
    * @returns
    */
   getPixelColor(x: number, y: number): ColorArray {
+    // Get the offset of the pixel
     const off = this.getPixelOffset(x, y);
+    // Return the color of the pixel
     return [this.p.pixels[off], this.p.pixels[off + 1], this.p.pixels[off + 2], this.p.pixels[off + 3]];
   }
 
@@ -52,10 +54,12 @@ export class PixelHelper {
    * @param fillColor Color to fill the pixel with
    */
   fillPixelWithColor(x: number, y: number, fillColor: ColorArray) {
+    // Get the offset of the pixel
     const currentIndex = this.getPixelOffset(x, y);
     for (let colorIndex = 0; colorIndex < 4; colorIndex++) {
       for (let columnIndex = 0; columnIndex < this.density; columnIndex++) {
         for (let rowIndex = 0; rowIndex < this.density; rowIndex++) {
+          // Fill the pixel with the provided color
           this.p.pixels[currentIndex + colorIndex + this.pixelRowSize * rowIndex + 4 * columnIndex] =
             fillColor[colorIndex];
         }

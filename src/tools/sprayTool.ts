@@ -18,6 +18,7 @@ export class SprayTool extends Tool {
       cursorClass: 'cursor-spray',
       ...config
     });
+    // Add points option
     this.options.push(
       new RangeOption(
         p,
@@ -32,6 +33,8 @@ export class SprayTool extends Tool {
         }
       )
     );
+
+    // Add spread option
     this.options.push(
       new RangeOption(
         p,

@@ -27,6 +27,9 @@ export class RangeOption extends ToolOption<number> {
     };
   }
 
+  /**
+   * Adds a new range option to the options element
+   */
   addToList(): void {
     const normalizedLabel = this.normalize(this.options.label);
     const inputID = `${normalizedLabel}-range`;

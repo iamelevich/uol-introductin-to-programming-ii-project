@@ -17,6 +17,7 @@ export class PencilTool extends Tool {
       iconType: IconType.FA,
       ...config
     });
+    // Add stroke weight option
     this.options.push(
       new RangeOption(p, (value: number) => {
         this.p.strokeWeight(value);
