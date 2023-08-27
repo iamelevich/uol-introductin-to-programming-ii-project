@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/iamelevich/uol-introductin-to-programming-ii-project/compare/v1.1.0...v1.1.1) (2023-08-25)
+
+
+### Bug Fixes
+
+* **download:** set `png` as default value for download ([1f6724b](https://github.com/iamelevich/uol-introductin-to-programming-ii-project/commit/1f6724bcb64a4d53c4adbeeec6d0987b19358043))
+
 ## [1.1.0](https://github.com/iamelevich/uol-introductin-to-programming-ii-project/compare/v1.0.0...v1.1.0) (2023-08-18)
 
 
